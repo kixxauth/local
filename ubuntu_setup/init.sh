@@ -4,7 +4,6 @@ setup=$nosync/setup
 HOME_LOCAL=$HOME/local
 HOME_LOCAL_BIN=$HOME_LOCAL/bin
 BAK=$nosync/bak
-bak_etc=$BAK/install-conf-bak.tar.bz2
 
 # Create the local dir
 if [ -d $HOME_LOCAL ]; then
@@ -44,14 +43,6 @@ if [ -d $setup ]; then
 else
     echo 'creating '$setup' dir'
     mkdir $setup
-fi
-
-# Backup the /etc config dir while it's still fresh.
-if [ -f $bak_etc ]; then
-    echo '/etc has already been backed up to '$bak_etc
-else
-    echo 'making backup of /etc'
-    tar -cjf $bak_etc /etc
 fi
 
 # Download the rsync script
