@@ -2,8 +2,8 @@
 + .cache/google-chrome/***
 + .config/google-chrome/***
 + documents/***
-+ .fonts/***
 + fireworksproject/***
++ .fonts/***
 + .gitconfig
 + .gitignore
 + .hgrc
@@ -19,5 +19,8 @@
 + .opera/***
 + projects/***
 + .ssh/***
-+ .vim***
++ temp/***
++ .vim/***
++ .viminfo
++ .vimrc
 - *
