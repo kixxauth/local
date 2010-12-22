@@ -13,22 +13,28 @@
 # --human-readable
 # --progress
 # --log-file=FILE
-NOSYNC=$HOME/nosync
-SYNC=$NOSYNC/sync
+nosync=$HOME/nosync
+sync=$nosync/sync
 
 # Create the sync dir if it does not exist
-if [ -d $SYNC ]; then
-    echo $SYNC' dir already created'
+if [ -d $sync ]; then
+    echo $sync' dir already created'
 else
-    echo 'creating '$SYNC' dir'
-    mkdir $SYNC
+    echo 'creating '$sync' dir'
+    mkdir $sync
+fi
+
+# Remove the previous log
+if [ -f $sync/sync.log ]; then
+    echo 'removing previous log file...'
+    rm $sync/sync.log
 fi
 
 # Download the exclude list if we don't have it already.
-if ! [ -f $SYNC/sync.list ]; then
+if ! [ -f $sync/sync.list ]; then
     echo 'getting sync.list from GitHub'
-    wget http://github.com/kixxauth/scripts/raw/master/sync.list $SYNC/sync.list
-    if ! [ -f $SYNC/sync.list ]; then
+    wget --no-check-certificate https://github.com/kixxauth/local/raw/master/system_sync/sync.list $sync/sync.list
+    if ! [ -f $sync/sync.list ]; then
         echo 'unable to download sync.list from GitHub'
         # We can't go on.
         exit
@@ -49,6 +55,6 @@ rsync \
 --compress \
 --progress \
 --human-readable \
---exclude-from=$SYNC/sync.list \
---log-file=$SYNC/sync.log \
+--exclude-from=$sync/sync.list \
+--log-file=$sync/sync.log \
 kixx@192.168.1.$1:~/ ~/

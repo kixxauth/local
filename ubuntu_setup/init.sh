@@ -46,11 +46,6 @@ else
     mkdir $setup
 fi
 
-# Move this script
-if [ -f $HOME/init.sh ]; then
-    mv $HOME/init.sh $setup/
-fi
-
 # Backup the /etc config dir while it's still fresh.
 if [ -f $bak_etc ]; then
     echo '/etc has already been backed up to '$bak_etc
@@ -62,7 +57,7 @@ fi
 # Download the rsync script
 if ! [ -f $HOME_LOCAL_BIN/syncpull ]; then
     echo 'getting syncpull.sh from GitHub'
-    wget http://github.com/kixxauth/scripts/raw/master/syncpull.sh $HOME_LOCAL_BIN/syncpull
+    wget --no-check-certificate https://github.com/kixxauth/local/raw/master/system_sync/syncpull.sh $HOME_LOCAL_BIN/syncpull
     if [ -f $HOME_LOCAL_BIN/syncpull ]; then
         chmod 764 $HOME_LOCAL_BIN/syncpull
     else
@@ -75,7 +70,7 @@ fi
 # Download the applications installation script
 if ! [ -f $setup/ubuntu-packages.sh ]; then
     echo 'getting ubuntu-packages.sh from GitHub'
-    wget http://github.com/kixxauth/scripts/raw/master/ubuntu-packages.sh $setup/ubuntu-packages.sh
+    wget --no-check-certificate https://github.com/kixxauth/local/raw/master/ubuntu_setup/ubuntu-packages.sh $setup/ubuntu-packages.sh
     if [ -f $setup/ubuntu-packages.sh ]; then
         chmod 764 $setup/ubuntu-packages.sh
     else
@@ -85,4 +80,9 @@ if ! [ -f $setup/ubuntu-packages.sh ]; then
     fi
 else
     echo 'ubuntu-packages.sh already downloaded'
+fi
+
+# Move this script
+if [ -f $HOME/init.sh ]; then
+    mv $HOME/init.sh $setup/
 fi
