@@ -31,16 +31,12 @@ if [ -f $sync/sync.log ]; then
 fi
 
 # Download the exclude list if we don't have it already.
+echo 'getting sync.list from GitHub'
+wget --no-check-certificate https://github.com/kixxauth/local/raw/master/system_sync/sync.list $sync/sync.list
 if ! [ -f $sync/sync.list ]; then
-    echo 'getting sync.list from GitHub'
-    wget --no-check-certificate https://github.com/kixxauth/local/raw/master/system_sync/sync.list $sync/sync.list
-    if ! [ -f $sync/sync.list ]; then
-        echo 'unable to download sync.list from GitHub'
-        # We can't go on.
-        exit
-    fi
-else
-    echo 'sync.list already downloaded'
+    echo 'unable to download sync.list from GitHub'
+    # We can't go on.
+    exit
 fi
 
 rsync \
