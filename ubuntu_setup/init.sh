@@ -57,7 +57,7 @@ fi
 # Download the rsync script
 if ! [ -f $HOME_LOCAL_BIN/syncpull ]; then
     echo 'getting syncpull.sh from GitHub'
-    wget --no-check-certificate https://github.com/kixxauth/local/raw/master/system_sync/syncpull.sh $HOME_LOCAL_BIN/syncpull
+    wget --no-check-certificate --output-document=$HOME_LOCAL_BIN/syncpull https://github.com/kixxauth/local/raw/master/system_sync/syncpull.sh
     if [ -f $HOME_LOCAL_BIN/syncpull ]; then
         chmod 764 $HOME_LOCAL_BIN/syncpull
     else
@@ -70,7 +70,7 @@ fi
 # Download the applications installation script
 if ! [ -f $setup/ubuntu-packages.sh ]; then
     echo 'getting ubuntu-packages.sh from GitHub'
-    wget --no-check-certificate https://github.com/kixxauth/local/raw/master/ubuntu_setup/ubuntu-packages.sh $setup/ubuntu-packages.sh
+    wget --no-check-certificate --output-document=$setup/ubuntu-packages.sh https://github.com/kixxauth/local/raw/master/ubuntu_setup/ubuntu-packages.sh
     if [ -f $setup/ubuntu-packages.sh ]; then
         chmod 764 $setup/ubuntu-packages.sh
     else
