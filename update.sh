@@ -24,15 +24,15 @@ cd ~/projects/github/local
 git pull origin master
 
 # update the rsync exclude list
-echo 'updating sync.list'
+echo 'updating '$sync'/sync.list'
 cp system_sync/sync.list $sync/sync.list
 
 # update the rsync script
-echo 'updating syncpull'
+echo 'updating ~/local/bin/syncpull'
 cp system_sync/syncpull.sh ~/local/bin/syncpull
 chmod 764 ~/local/bin/syncpull
 
 # update this script
-echo 'updating update'
+echo 'updating ~/local/bin/update'
 cp update.sh ~/local/bin/update
 chmod 764 ~/local/bin/update
