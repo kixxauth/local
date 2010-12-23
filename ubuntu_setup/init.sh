@@ -34,7 +34,7 @@ if [ -d $BAK ]; then
     echo $BAK' dir already created'
 else
     echo 'creating '$BAK' dir'
-    mkdir $BACK
+    mkdir $BAK
 fi
 
 # Create the setup sub dir in nosync
