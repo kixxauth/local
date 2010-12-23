@@ -30,12 +30,10 @@ if [ -f $sync/sync.log ]; then
     rm $sync/sync.log
 fi
 
-# Download the exclude list if we don't have it already.
-echo 'getting sync.list from GitHub'
-wget --no-check-certificate --output-document=$sync/sync.list https://github.com/kixxauth/local/raw/master/system_sync/sync.list
+# Check for the sync.list
 if ! [ -f $sync/sync.list ]; then
-    echo 'unable to download sync.list from GitHub'
-    # We can't go on.
+    echo 'could not find '$sync/sync.list
+    echo 'try running the update script first'
     exit
 fi
 
