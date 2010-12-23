@@ -32,3 +32,7 @@ echo 'updating syncpull'
 cp system_sync/syncpull.sh ~/local/bin/syncpull
 chmod 764 ~/local/bin/syncpull
 
+# update this script
+echo 'updating update'
+cp update.sh ~/local/bin/update
+chmod 764 ~/local/bin/update
