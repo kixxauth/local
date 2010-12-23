@@ -13,28 +13,18 @@
 # --human-readable
 # --progress
 # --log-file=FILE
-nosync=$HOME/nosync
-sync=$nosync/sync
-
-# Create the sync dir if it does not exist
-if [ -d $sync ]; then
-    echo $sync' dir already created'
-else
-    echo 'creating '$sync' dir'
-    mkdir $sync
-fi
 
 # Remove the previous log
-if [ -f $sync/sync.log ]; then
+if [ -f $2/sync.log ]; then
     echo 'removing previous log file...'
-    rm $sync/sync.log
+    rm $2/sync.log
 fi
 
 # Check for the sync.list
-if ! [ -f $sync/sync.list ]; then
-    echo 'could not find '$sync/sync.list
+if ! [ -f $2/sync.list ]; then
+    echo 'could not find '$2/sync.list
     echo 'try running the update script first'
-    exit
+    exit 1
 fi
 
 rsync \
@@ -51,3 +41,5 @@ rsync \
 --exclude-from=$sync/sync.list \
 --log-file=$sync/sync.log \
 kixx@192.168.1.$1:~/ ~/
+
+exit $?
