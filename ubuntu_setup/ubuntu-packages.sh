@@ -12,6 +12,7 @@ tree \
 iotop \
 git-core \
 mercurial \
+mplayer \
 subversion \
 curl \
 ncftp \
@@ -23,4 +24,4 @@ sun-java6-fonts \
 gimp \
 irssi
 apt-get update
-apt-get upgrade
+apt-get upgrade --fix-missing --assume-yes
