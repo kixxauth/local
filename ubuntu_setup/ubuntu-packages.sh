@@ -3,25 +3,26 @@
 echo 'Installing essential applications:'
 apt-get install --fix-missing --assume-yes --auto-remove \
 build-essential \
-vim-gnome \
-openssh-client \
-openssh-server \
+curl \
+elinks \
+flashplugin-nonfree \
+gimp \
+git-core \
+iotop \
+irssi \
+keepassx \
 libssl0.9.8 \
 libssl-dev \
-tree \
-iotop \
-git-core \
 mercurial \
 mplayer \
-subversion \
-curl \
 ncftp \
-flashplugin-nonfree \
-keepassx \
+openssh-client \
+openssh-server \
+subversion \
 sun-java6-jre \
 sun-java6-plugin \
 sun-java6-fonts \
-gimp \
-irssi
+tree \
+vim-gnome
 apt-get update
 apt-get upgrade --fix-missing --assume-yes
