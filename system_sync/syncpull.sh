@@ -46,7 +46,6 @@ rsync \
 --times \
 --group \
 --owner \
---update \
 --del \
 --compress \
 --progress \
