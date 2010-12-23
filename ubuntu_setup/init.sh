@@ -3,6 +3,7 @@ nosync=$HOME/nosync
 setup=$nosync/setup
 HOME_LOCAL=$HOME/local
 HOME_LOCAL_BIN=$HOME_LOCAL/bin
+HOME_LOCAL_SBIN=$HOME_LOCAL/sbin
 BAK=$nosync/bak
 
 # Create the local dir
@@ -19,6 +20,14 @@ if [ -d $HOME_LOCAL_BIN ]; then
 else
     echo 'creating '$HOME_LOCAL_BIN' dir'
     mkdir $HOME_LOCAL_BIN
+fi
+
+# Create the local sbin dir
+if [ -d $HOME_LOCAL_SBIN ]; then
+    echo $HOME_LOCAL_SBIN' dir already created'
+else
+    echo 'creating '$HOME_LOCAL_SBIN' dir'
+    mkdir $HOME_LOCAL_SBIN
 fi
 
 # Create the nosync dir
