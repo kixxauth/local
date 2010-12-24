@@ -1,4 +1,8 @@
 - ***.swp
 - ***.pyc
+- .cache/google-chrome/***
+- .mozilla/firefox/kixx.default/Cache/***
+- .mozilla/firefox/kixx.Developer/Cache/***
+- .opera/cache/***
 - node-latest-install/***
 - temp/***

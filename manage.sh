@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Git repos
-PROJECTS_DIR=$HOME/projects
+PROJECTS_DIR=$HOME/development
 GITHUB_DIR=$PROJECTS_DIR/github
 
 GITS="\
@@ -77,6 +77,7 @@ done
 exit_msg ()
 {
     echo "try:"
+    echo "bak - backup and version the local dir"
     echo "sync - sync machines and update locally"
     echo "update - update packages"
     echo "bin - update local scripts"
@@ -169,6 +170,10 @@ update_bin_scripts ()
     echo 'updating '$SYNC_DIR'/sync.list'
     cp $GITHUB_DIR/local/system_sync/sync.list $SYNC_DIR/sync.list
 
+    # updating the main backup exclude list
+    echo 'updating '$SYNC_DIR'/main_bak.list'
+    cp $GITHUB_DIR/local/system_sync/main_bak.list $SYNC_DIR/main_bak.list
+
     # update the rsync script
     echo 'updating '$BIN_DIR'/syncpull'
     cp $GITHUB_DIR/local/system_sync/syncpull.sh $BIN_DIR/syncpull
@@ -188,10 +193,89 @@ update_bin_scripts ()
     chmod 764 $BIN_DIR/manage
 }
 
+# 1 source
+# 2 destination
+# 3 exlude list
+# 4 logfile
+versioned_backup ()
+{
+    must_not_sudo
+
+    # Check the source
+    if ! [ -d $1 ]; then
+        echo 'could not find the source at '$1
+        return 1
+    fi
+
+    # Check the destination
+    if ! [ -d $2 ]; then
+        echo 'could not find the destination '$2
+        return 1
+    fi
+
+    # Check for the sync.list
+    if ! [ -f $3 ]; then
+        echo 'could not find the exlude list at '$3
+        echo 'try running the update script first'
+        return 1
+    fi
+
+    # Remove the previous log
+    if [ -f $4 ]; then
+        echo 'removing previous log file from '$4
+        rm $4
+    fi
+
+    # -r --recursive
+    # -l --links copy simlinks as simlinks (don't resolve them)
+    # -p --perms preserve permissions
+    # -t --times preserve modification times
+    # -g --group preserve group
+    # -o --owner preserve owner
+    # -u --update skip files that are newer on the receiver
+    # --del reciever deletes extraneous files during transfer
+    # --commpress compress data
+    # --exclude-from=FILE read exclude patterns from file
+    # --human-readable
+    # --progress
+    # --log-file=FILE
+    rsync \
+    --recursive \
+    --links \
+    --perms \
+    --times \
+    --group \
+    --owner \
+    --progress \
+    --human-readable \
+    --exclude-from=$3 \
+    --log-file=$4 \
+    $1/ $2/
+
+    cd $2
+    git checkout master
+    if [ $? != '0' ]; then
+        echo "exiting"
+        return $?
+    fi
+
+    git add .
+    if [ -z "$5" ]; then
+        git commit -m "$(date)"
+    else
+        git commit -m $5
+    fi
+}
+
 if [ -z "$1" ]; then
     echo "exiting without running anything "
     exit_msg
     exit 0
+fi
+
+if [ $1 = 'bak' ]; then
+    versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log
+    exit $?
 fi
 
 if [ $1 = 'sync' ]; then
