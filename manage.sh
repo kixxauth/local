@@ -77,7 +77,7 @@ done
 exit_msg ()
 {
     echo "try:"
-    echo "bak - backup and version the local dir"
+    echo "bak - backup and version the local dir [commit msg]"
     echo "sync - sync machines and update locally"
     echo "update - update packages"
     echo "bin - update local scripts"
@@ -265,6 +265,8 @@ versioned_backup ()
     else
         git commit -m $5
     fi
+
+    vim $4
 }
 
 if [ -z "$1" ]; then
@@ -274,7 +276,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ $1 = 'bak' ]; then
-    versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log
+    versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log $2
     exit $?
 fi
 
