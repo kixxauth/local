@@ -200,13 +200,13 @@ if [ $1 = 'sync' ]; then
         exit_msg
         exit 1
     fi
+    update_local_git_repo
+    update_bin_scripts
     syncpull $2 $SYNC_DIR
     if [ $? != '0' ]; then
         echo "exiting"
         exit $?
     fi
-    update_local_git_repo
-    update_bin_scripts
     vim $SYNC_DIR/sync.log
     exit 0
 fi
