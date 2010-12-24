@@ -1,7 +1,8 @@
 - ***.swp
-- projects/github/local/***
+- development/github/local/***
 + .cache/google-chrome/***
 + .config/google-chrome/***
++ development/***
 + documents/***
 + fireworksproject/***
 + .fonts/***
@@ -18,7 +19,7 @@
 + .ncftp/***
 + node-latest-install/***
 + .opera/***
-+ projects/***
++ sole_proprietor/***
 + .ssh/***
 + temp/***
 + .vim/***
