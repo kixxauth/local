@@ -38,8 +38,8 @@ rsync \
 --compress \
 --progress \
 --human-readable \
---exclude-from=$sync/sync.list \
---log-file=$sync/sync.log \
+--exclude-from=$2/sync.list \
+--log-file=$2/sync.log \
 kixx@192.168.1.$1:~/ ~/
 
 exit $?
