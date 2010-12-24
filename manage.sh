@@ -276,6 +276,8 @@ if [ -z "$1" ]; then
 fi
 
 if [ $1 = 'bak' ]; then
+    update_local_git_repo
+    update_bin_scripts
     versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log $2
     exit $?
 fi
