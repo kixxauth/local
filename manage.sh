@@ -231,10 +231,11 @@ versioned_backup ()
     must_not_sudo
 
     # Check the source
-    if ! [ -d $1 ]; then
-        echo 'could not find the source at '$1
-        return 1
-    fi
+    # TODO: This does not work for things like `kixx@192.168.1.2:~/`
+    #if ! [ -d $1 ]; then
+    #    echo 'could not find the source at '$1
+    #    return 1
+    #fi
 
     # Check the destination
     if ! [ -d $2 ]; then
@@ -308,7 +309,7 @@ if [ $1 = 'rbak' ]; then
     update_local_git_repo
     update_bin_scripts
     versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-kris-bak.list /dw/bak/kris/toshiba_A8/latest.log
-    #git_version /dw/bak/kris/toshiba_A8/
+    #git_version /dw/bak/kris/toshiba_A8/ $3
     vim /dw/bak/kris/toshiba_A8/latest.log
     exit $?
 fi
