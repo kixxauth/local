@@ -81,6 +81,7 @@ exit_msg ()
 {
     echo "try:"
     echo "bak - backup and version the local dir [commit msg]"
+    echo "rbak - backup and version the local dir [last IP digit] [commit msg]"
     echo "sync - sync machines and update locally [last IP digit]"
     echo "update - update packages"
     echo "bin - update local scripts"
@@ -196,10 +197,31 @@ update_bin_scripts ()
     chmod 764 $BIN_DIR/manage
 }
 
-# 1 source
-# 2 destination
-# 3 exlude list
-# 4 logfile
+# $1 repo dir
+# $2 commit msg
+git_version ()
+{
+    must_not_sudo
+
+    cd $1
+    git checkout master
+    if [ $? != '0' ]; then
+        echo "exiting"
+        return $?
+    fi
+
+    git add .
+    if [ -z "$2" ]; then
+        git commit -m "$(date)"
+    else
+        git commit -m "$2"
+    fi
+}
+
+# $1 source
+# $2 destination
+# $3 exlude list
+# $4 logfile
 versioned_backup ()
 {
     must_not_sudo
@@ -254,22 +276,6 @@ versioned_backup ()
     --exclude-from=$3 \
     --log-file=$4 \
     $1/ $2/
-
-    cd $2
-    git checkout master
-    if [ $? != '0' ]; then
-        echo "exiting"
-        return $?
-    fi
-
-    git add .
-    if [ -z "$5" ]; then
-        git commit -m "$(date)"
-    else
-        git commit -m "$5"
-    fi
-
-    vim $4
 }
 
 if [ -z "$1" ]; then
@@ -282,13 +288,30 @@ if [ $1 = 'bak' ]; then
     create_dirs
     update_local_git_repo
     update_bin_scripts
-    versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log $2
+    versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log
+    git_version /dw/bak/kris/main/ $2
+    vim /dw/bak/kris/main/latest.log
+    exit $?
+fi
+
+if [ $1 = 'rbak' ]; then
+    if [ -z $2 ]; then
+        echo "the rbak command needs the last digit of the target IP"
+        exit_msg
+        exit 1
+    fi
+    create_dirs
+    update_local_git_repo
+    update_bin_scripts
+    versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-kris-bak.list /dw/bak/kris/toshiba_A8/latest.log
+    #git_version /dw/bak/kris/toshiba_A8/
+    vim /dw/bak/kris/toshiba_A8/latest.log
     exit $?
 fi
 
 if [ $1 = 'sync' ]; then
     if [ -z $2 ]; then
-        echo "the sync command needs a parameter"
+        echo "the sync command needs the last digit of the target IP"
         exit_msg
         exit 1
     fi

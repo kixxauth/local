@@ -1,4 +1,5 @@
 - ***.swp
+- ***.pyc
 - development/github/local/***
 + .cache/google-chrome/***
 + .config/google-chrome/***
