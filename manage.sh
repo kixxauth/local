@@ -181,6 +181,7 @@ update_bin_scripts ()
     # updating the toshiba backup exclude lists
     echo 'updating '$SYNC_DIR'/toshiba_A8-kris-bak.list'
     cp $GITHUB_DIR/local/system_sync/toshiba_A8-kris-bak.list $SYNC_DIR/toshiba_A8-kris-bak.list
+    cp $GITHUB_DIR/local/system_sync/toshiba_A8-jocelyn-bak.list $SYNC_DIR/toshiba_A8-jocelyn-bak.list
 
     # update the rsync script
     echo 'updating '$BIN_DIR'/syncpull'
@@ -309,6 +310,7 @@ if [ $1 = 'rbak' ]; then
     update_local_git_repo
     update_bin_scripts
     versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-kris-bak.list /dw/bak/kris/toshiba_A8/latest.log
+    versioned_backup jocelyn@192.168.1.$2:~/ /dw/bak/jocelyn/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-jocelyn-bak.list /dw/bak/jocelyn/toshiba_A8/latest.log
     #git_version /dw/bak/kris/toshiba_A8/ $3
     vim /dw/bak/kris/toshiba_A8/latest.log
     exit $?
