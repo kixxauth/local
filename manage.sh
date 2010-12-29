@@ -311,8 +311,8 @@ if [ $1 = 'rbak' ]; then
     update_bin_scripts
     versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-kris-bak.list /dw/bak/kris/toshiba_A8/latest.log
     versioned_backup jocelyn@192.168.1.$2:~/ /dw/bak/jocelyn/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-jocelyn-bak.list /dw/bak/jocelyn/toshiba_A8/latest.log
-    #git_version /dw/bak/kris/toshiba_A8/ $3
-    vim /dw/bak/kris/toshiba_A8/latest.log
+    git_version /dw/bak/kris/toshiba_A8/ $3
+    vim /dw/bak/kris/toshiba_A8/latest.log /dw/bak/jocelyn/toshiba_A8/latest.log
     exit $?
 fi
 
