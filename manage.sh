@@ -66,13 +66,16 @@ $GITHUB_DIR \
 # Handy to have around
 DATE_TODAY="$(date +%Y-%m-%d)"
 
-for DIR in $DIRECTORIES
-do
-    if ! [ -d $DIR ]; then
-        echo 'creating '$DIR' dir'
-        mkdir $DIR
-    fi
-done
+create_dirs ()
+{
+    for DIR in $DIRECTORIES
+    do
+        if ! [ -d $DIR ]; then
+            echo 'creating '$DIR' dir'
+            mkdir $DIR
+        fi
+    done
+}
 
 exit_msg ()
 {
@@ -276,6 +279,7 @@ if [ -z "$1" ]; then
 fi
 
 if [ $1 = 'bak' ]; then
+    create_dirs
     update_local_git_repo
     update_bin_scripts
     versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log $2
@@ -288,6 +292,7 @@ if [ $1 = 'sync' ]; then
         exit_msg
         exit 1
     fi
+    create_dirs
     update_local_git_repo
     update_bin_scripts
     syncpull $2 $SYNC_DIR
@@ -300,6 +305,7 @@ if [ $1 = 'sync' ]; then
 fi
 
 if [ $1 = 'bin' ]; then
+    create_dirs
     update_local_git_repo
     update_bin_scripts
     exit 0
@@ -320,11 +326,13 @@ if [ $1 = 'pkgs' ]; then
 fi
 
 if [ $1 = 'etcbak' ]; then
+    create_dirs
     backup_etc $2
     exit 0
 fi
 
 if [ $1 = 'bootstrap' ]; then
+    create_dirs
     get_local_git_repo
     update_bin_scripts
     exit 0
