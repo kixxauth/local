@@ -225,8 +225,8 @@ git_version ()
 
 # $1 source
 # $2 destination
-# $3 exlude list
-# $4 logfile
+# $3 logfile
+# $4 exlude list
 versioned_backup ()
 {
     must_not_sudo
@@ -244,17 +244,10 @@ versioned_backup ()
         return 1
     fi
 
-    # Check for the sync.list
-    if ! [ -f $3 ]; then
-        echo 'could not find the exlude list at '$3
-        echo 'try running the update script first'
-        return 1
-    fi
-
     # Remove the previous log
-    if [ -f $4 ]; then
-        echo 'removing previous log file from '$4
-        rm $4
+    if [ -f $3 ]; then
+        echo 'removing previous log file from '$3
+        rm $3
     fi
 
     # -r --recursive
@@ -270,18 +263,40 @@ versioned_backup ()
     # --human-readable
     # --progress
     # --log-file=FILE
-    rsync \
-    --recursive \
-    --links \
-    --perms \
-    --times \
-    --group \
-    --owner \
-    --progress \
-    --human-readable \
-    --exclude-from=$3 \
-    --log-file=$4 \
-    $1/ $2/
+
+    # Check for the sync.list
+    if [ -n "$4" ]; then
+        if ! [ -f $4 ]; then
+            echo 'could not find the exlude list at '$4
+            echo 'try running the update script first'
+            return 1
+        else
+            rsync \
+            --recursive \
+            --links \
+            --perms \
+            --times \
+            --group \
+            --owner \
+            --progress \
+            --human-readable \
+            --exclude-from=$4 \
+            --log-file=$3 \
+            $1/ $2/
+        fi
+    else
+        rsync \
+        --recursive \
+        --links \
+        --perms \
+        --times \
+        --group \
+        --owner \
+        --progress \
+        --human-readable \
+        --log-file=$3 \
+        $1/ $2/
+    fi
 }
 
 if [ -z "$1" ]; then
@@ -294,7 +309,7 @@ if [ $1 = 'bak' ]; then
     create_dirs
     update_local_git_repo
     update_bin_scripts
-    versioned_backup $HOME /dw/bak/kris/main/tree $SYNC_DIR/main_bak.list /dw/bak/kris/main/latest.log
+    versioned_backup $HOME /dw/bak/kris/main/tree /dw/bak/kris/main/latest.log $SYNC_DIR/main_bak.list
     git_version /dw/bak/kris/main/ $2
     vim /dw/bak/kris/main/latest.log
     exit $?
@@ -309,10 +324,12 @@ if [ $1 = 'rbak' ]; then
     create_dirs
     update_local_git_repo
     update_bin_scripts
-    versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-kris-bak.list /dw/bak/kris/toshiba_A8/latest.log
-    versioned_backup jocelyn@192.168.1.$2:~/ /dw/bak/jocelyn/toshiba_A8/tree/ $SYNC_DIR/toshiba_A8-jocelyn-bak.list /dw/bak/jocelyn/toshiba_A8/latest.log
+    versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ /dw/bak/kris/toshiba_A8/latest.log $SYNC_DIR/toshiba_A8-kris-bak.list
     git_version /dw/bak/kris/toshiba_A8/ $3
-    vim /dw/bak/kris/toshiba_A8/latest.log /dw/bak/jocelyn/toshiba_A8/latest.log
+    versioned_backup jocelyn@192.168.1.$2:~/ /dw/bak/jocelyn/toshiba_A8/tree/ /dw/bak/jocelyn/toshiba_A8/latest.log $SYNC_DIR/toshiba_A8-jocelyn-bak.list
+    versioned_backup jocelyn@192.168.1.$2:~/Pictures /dw/media/img/jocelyn/Pictures/ /dw/media/img/jocelyn/Pictures/latest.log
+    versioned_backup jocelyn@192.168.1.$2:~/Videos /dw/media/video/jocelyn/Videos/ /dw/media/video/jocelyn/Videos/latest.log
+    vim /dw/bak/kris/toshiba_A8/latest.log /dw/bak/jocelyn/toshiba_A8/latest.log /dw/media/img/jocelyn/Pictures/latest.log /dw/media/video/jocelyn/Videos/latest.log
     exit $?
 fi
 
