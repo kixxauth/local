@@ -178,6 +178,10 @@ update_bin_scripts ()
     echo 'updating '$SYNC_DIR'/main_bak.list'
     cp $GITHUB_DIR/local/system_sync/main_bak.list $SYNC_DIR/main_bak.list
 
+    # updating the toshiba backup exclude lists
+    echo 'updating '$SYNC_DIR'/toshiba_A8-kris-bak.list'
+    cp $GITHUB_DIR/local/system_sync/toshiba_A8-kris-bak.list $SYNC_DIR/toshiba_A8-kris-bak.list
+
     # update the rsync script
     echo 'updating '$BIN_DIR'/syncpull'
     cp $GITHUB_DIR/local/system_sync/syncpull.sh $BIN_DIR/syncpull
