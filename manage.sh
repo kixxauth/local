@@ -266,7 +266,7 @@ versioned_backup ()
     if [ -z "$5" ]; then
         git commit -m "$(date)"
     else
-        git commit -m $5
+        git commit -m "$5"
     fi
 
     vim $4
