@@ -78,11 +78,11 @@ exit_msg ()
 {
     echo "try:"
     echo "bak - backup and version the local dir [commit msg]"
-    echo "sync - sync machines and update locally"
+    echo "sync - sync machines and update locally [last IP digit]"
     echo "update - update packages"
     echo "bin - update local scripts"
     echo "pkgs - install distro packages"
-    echo "etcbak - backup the /etc dir (pass file name)"
+    echo "etcbak - backup the /etc dir [file name part]"
     echo "bootstrap - setup local git repo and scripts"
 }
 
