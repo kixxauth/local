@@ -81,8 +81,8 @@ create_dirs ()
 exit_msg ()
 {
     echo "try:"
-    echo "bak - backup and version the local dir [commit msg]"
-    echo "rbak - backup and version the local dir [last IP digit] [commit msg]"
+    echo "bak - backup and version the local home dir [commit_msg]"
+    echo "rbak - backup remote directories [last IP digit] [commit_msg]"
     echo "sync - sync machines and update locally [last IP digit]"
     echo "update - update packages"
     echo "bin - update local scripts"
