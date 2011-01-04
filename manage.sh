@@ -147,7 +147,7 @@ update_packages ()
     must_be_sudo
     echo 'Updating applications:'
     apt-get update
-    apt-get upgrade --fix-missing --assume-yes
+    apt-get dist-upgrade --fix-missing --assume-yes
 }
 
 cleanup_packages ()
