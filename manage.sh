@@ -12,6 +12,7 @@ MY_PACKS="\
 build-essential \
 curl \
 elinks \
+dkms \
 flashplugin-nonfree \
 gimp \
 git-core \
