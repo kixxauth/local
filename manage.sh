@@ -311,6 +311,10 @@ if [ $1 = 'bak' ]; then
     update_local_git_repo
     update_bin_scripts
     versioned_backup $HOME /dw/bak/kris/main/tree /dw/bak/kris/main/latest.log $SYNC_DIR/main_bak.list
+    if [ $? != '0' ]; then
+        echo "exiting"
+        exit $?
+    fi
     git_version /dw/bak/kris/main/ $2
     vim /dw/bak/kris/main/latest.log
     exit $?
@@ -326,10 +330,29 @@ if [ $1 = 'rbak' ]; then
     update_local_git_repo
     update_bin_scripts
     versioned_backup kixx@192.168.1.$2:~/ /dw/bak/kris/toshiba_A8/tree/ /dw/bak/kris/toshiba_A8/latest.log $SYNC_DIR/toshiba_A8-kris-bak.list
+    if [ $? != '0' ]; then
+        echo "exiting"
+        exit $?
+    fi
     git_version /dw/bak/kris/toshiba_A8/ $3
     versioned_backup jocelyn@192.168.1.$2:~/ /dw/bak/jocelyn/toshiba_A8/tree/ /dw/bak/jocelyn/toshiba_A8/latest.log $SYNC_DIR/toshiba_A8-jocelyn-bak.list
+    if [ $? != '0' ]; then
+        echo "exiting"
+        vim /dw/bak/kris/toshiba_A8/latest.log
+        exit $?
+    fi
     versioned_backup jocelyn@192.168.1.$2:~/Pictures /dw/media/img/jocelyn/Pictures/ /dw/media/img/jocelyn/Pictures/latest.log
+    if [ $? != '0' ]; then
+        echo "exiting"
+        vim /dw/bak/kris/toshiba_A8/latest.log /dw/bak/jocelyn/toshiba_A8/latest.log
+        exit $?
+    fi
     versioned_backup jocelyn@192.168.1.$2:~/Videos /dw/media/video/jocelyn/Videos/ /dw/media/video/jocelyn/Videos/latest.log
+    if [ $? != '0' ]; then
+        echo "exiting"
+        vim /dw/bak/kris/toshiba_A8/latest.log /dw/bak/jocelyn/toshiba_A8/latest.log /dw/media/img/jocelyn/Pictures/latest.log
+        exit $?
+    fi
     vim /dw/bak/kris/toshiba_A8/latest.log /dw/bak/jocelyn/toshiba_A8/latest.log /dw/media/img/jocelyn/Pictures/latest.log /dw/media/video/jocelyn/Videos/latest.log
     exit $?
 fi
