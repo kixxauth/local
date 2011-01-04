@@ -4,6 +4,7 @@ echo 'Installing essential applications:'
 apt-get install --fix-missing --assume-yes --auto-remove \
 build-essential \
 curl \
+dkms \
 elinks \
 flashplugin-nonfree \
 gimp \
