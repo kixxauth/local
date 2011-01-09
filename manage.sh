@@ -173,20 +173,20 @@ update_bin_scripts ()
 
     # update the rsync exclude list
     echo 'updating '$SYNC_DIR'/sync.list'
-    cp $GITHUB_DIR/local/system_sync/sync.list $SYNC_DIR/sync.list
+    cp $GITHUB_DIR/local/rsync_lists/sync.list $SYNC_DIR/sync.list
 
     # updating the main backup exclude list
     echo 'updating '$SYNC_DIR'/main_bak.list'
-    cp $GITHUB_DIR/local/system_sync/main_bak.list $SYNC_DIR/main_bak.list
+    cp $GITHUB_DIR/local/rsync_lists/main_bak.list $SYNC_DIR/main_bak.list
 
     # updating the toshiba backup exclude lists
     echo 'updating '$SYNC_DIR'/toshiba_A8-kris-bak.list'
-    cp $GITHUB_DIR/local/system_sync/toshiba_A8-kris-bak.list $SYNC_DIR/toshiba_A8-kris-bak.list
-    cp $GITHUB_DIR/local/system_sync/toshiba_A8-jocelyn-bak.list $SYNC_DIR/toshiba_A8-jocelyn-bak.list
+    cp $GITHUB_DIR/local/rsync_lists/toshiba_A8-kris-bak.list $SYNC_DIR/toshiba_A8-kris-bak.list
+    cp $GITHUB_DIR/local/rsync_lists/toshiba_A8-jocelyn-bak.list $SYNC_DIR/toshiba_A8-jocelyn-bak.list
 
     # update the rsync script
     echo 'updating '$BIN_DIR'/syncpull'
-    cp $GITHUB_DIR/local/system_sync/syncpull.sh $BIN_DIR/syncpull
+    cp $GITHUB_DIR/local/syncpull.sh $BIN_DIR/syncpull
     chmod 764 $BIN_DIR/syncpull
 
     # update the firefox scripts
