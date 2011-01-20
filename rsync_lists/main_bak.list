@@ -5,4 +5,5 @@
 - .mozilla/firefox/kixx.Developer/Cache/***
 - .opera/cache/***
 - temp/***
-- .VirualBox/***
+- vmware/***
+- .vmware/***
