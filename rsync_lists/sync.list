@@ -24,4 +24,6 @@
 + .vim/***
 + .viminfo
 + .vimrc
++ vmware/***
++ .vmware/***
 - *
