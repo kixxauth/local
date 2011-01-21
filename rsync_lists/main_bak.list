@@ -1,6 +1,7 @@
 - ***.swp
 - ***.pyc
 - .cache/google-chrome/***
+- .macromedia/Flash_Player/***
 - .mozilla/firefox/kixx.default/Cache/***
 - .mozilla/firefox/kixx.Developer/Cache/***
 - .opera/cache/***
