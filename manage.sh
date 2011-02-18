@@ -66,6 +66,7 @@ $GITHUB_DIR \
 
 # Handy to have around
 DATE_TODAY="$(date +%Y-%m-%d)"
+DIRECTORY=$(cd `dirname $0` && pwd)
 
 create_dirs ()
 {
@@ -406,6 +407,8 @@ if [ $1 = 'bootstrap' ]; then
     create_dirs
     get_local_git_repo
     update_bin_scripts
+    cd DIRECTORY
+    rm $0
     exit 0
 fi
 
