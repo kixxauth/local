@@ -33,6 +33,14 @@ sun-java6-fonts \
 tree \
 vim-gnome \
 "
+PURGED_PACKS="\
+apt-xapian-index \
+tomboy \
+evolution \
+f-spot \
+rhythmbox \
+totem \
+"
 
 # For all items that are *not* to be synced between machines.
 NOSYNC_DIR=$HOME/nosync
@@ -163,9 +171,17 @@ cleanup_packages ()
 install_packages ()
 {
     must_be_sudo
-    echo 'Installing essential applications:'
-    echo $MY_PACKS
     apt-get install --fix-missing --assume-yes --auto-remove $MY_PACKS
+    echo 'Installed essential applications:'
+    echo $MY_PACKS
+}
+
+prune_packages ()
+{
+    must_be_sudo
+    apt-get purge --fix-missing --assume-yes --auto-remove $PURGED_PACKS
+    echo 'Removed unused packages:'
+    echo $PURGED_PACKS
 }
 
 update_bin_scripts ()
@@ -390,6 +406,7 @@ if [ $1 = 'update' ]; then
 fi
 
 if [ $1 = 'pkgs' ]; then
+    prune_packages
     install_packages
     update_packages
     cleanup_packages
