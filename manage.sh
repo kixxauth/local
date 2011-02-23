@@ -383,7 +383,7 @@ if [ $1 = 'sync' ]; then
     create_dirs
     update_local_git_repo
     update_bin_scripts
-    syncpull $2 $SYNC_DIR
+    ~/local/bin/syncpull $2 $SYNC_DIR
     if [ $? != '0' ]; then
         echo "exiting"
         exit $?
