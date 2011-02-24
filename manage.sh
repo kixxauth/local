@@ -214,6 +214,14 @@ update_bin_scripts ()
     cp $GITHUB_DIR/local/firefox_user.sh $BIN_DIR/firefox_user
     chmod 764 $BIN_DIR/firefox_user
 
+    # update utility scripts
+    echo 'updating '$BIN_DIR'/find_swap_files'
+    cp $GITHUB_DIR/local/find_swap_files.sh $BIN_DIR/find_swap_files
+    chmod 764 $BIN_DIR/find_swap_files
+    echo 'updating '$BIN_DIR'/del_swap_files'
+    cp $GITHUB_DIR/local/del_swap_files.sh $BIN_DIR/del_swap_files
+    chmod 764 $BIN_DIR/del_swap_files
+
     # update this script
     echo 'updating '$BIN_DIR'/manage'
     cp $GITHUB_DIR/local/manage.sh $BIN_DIR/manage
