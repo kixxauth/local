@@ -433,7 +433,7 @@ if [ $1 = 'bootstrap' ]; then
     create_dirs
     get_local_git_repo
     update_bin_scripts
-    cd DIRECTORY
+    cd $DIRECTORY
     rm $0
     exit 0
 fi
