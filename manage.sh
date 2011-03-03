@@ -32,6 +32,7 @@ sun-java6-plugin \
 sun-java6-fonts \
 tree \
 vim-gnome \
+unrar
 "
 PURGED_PACKS="\
 apt-xapian-index \
