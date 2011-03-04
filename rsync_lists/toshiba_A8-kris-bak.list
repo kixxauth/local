@@ -24,6 +24,7 @@
 - sole_proprietor/***
 - .ssh/***
 - temp/***
+- .VirtualBox
 - .vim/***
 - .viminfo
 - .vimrc
