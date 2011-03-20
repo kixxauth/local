@@ -122,8 +122,7 @@ get_local_git_repo ()
     must_not_sudo
     if [ -d $GITHUB_DIR/local ]; then
         echo 'deleting previous '$GITHUB_DIR/local
-        chmod -R 777 $GITHUB_DIR/local
-        rm -r $GITHUB_DIR/local
+        rm -rf $GITHUB_DIR/local
     fi
     echo 'cloning git@github.com:kixxauth/local.git'
     cd $GITHUB_DIR
@@ -136,6 +135,7 @@ update_local_git_repo ()
     echo 'pulling local git repo from Github'
     cd $GITHUB_DIR/local
     git pull origin master
+    git submodule update
 }
 
 backup_etc ()
@@ -222,6 +222,11 @@ update_bin_scripts ()
     echo 'updating '$BIN_DIR'/del_swap_files'
     cp $GITHUB_DIR/local/del_swap_files.sh $BIN_DIR/del_swap_files
     chmod 764 $BIN_DIR/del_swap_files
+
+    # update nave
+    echo 'updating '$BIN_DIR'/nave'
+    cp $GITHUB_DIR/local/nave/nave.sh $BIN_DIR/nave
+    chmod 764 $BIN_DIR/nave
 
     # update this script
     echo 'updating '$BIN_DIR'/manage'
