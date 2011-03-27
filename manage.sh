@@ -347,17 +347,6 @@ if [ $1 = 'bak' ]; then
         exit $?
     fi
     git_version /archive/bak/kris/main/ $2
-    rsync \
-    --recursive \
-    --links \
-    --perms \
-    --times \
-    --group \
-    --owner \
-    --progress \
-    --human-readable \
-    ~/.VirtualBox/ /archive/bak/kris/virtual_machines/VirtualBox/
-    exit $?
 fi
 
 if [ $1 = 'rbak' ]; then
