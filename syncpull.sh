@@ -14,15 +14,19 @@
 # --progress
 # --log-file=FILE
 
+IP=$1
+USER=$2
+SYNC_DIR=$3
+
 # Remove the previous log
-if [ -f $2/sync.log ]; then
+if [ -f $SYNC_DIR/sync.log ]; then
     echo 'removing previous log file...'
-    rm $2/sync.log
+    rm $SYNC_DIR/sync.log
 fi
 
 # Check for the sync.list
-if ! [ -f $2/sync.list ]; then
-    echo 'could not find '$2/sync.list
+if ! [ -f $SYNC_DIR/sync.list ]; then
+    echo 'could not find '$SYNC_DIR/sync.list
     echo 'try running the update script first'
     exit 1
 fi
@@ -38,8 +42,8 @@ rsync \
 --compress \
 --progress \
 --human-readable \
---exclude-from=$2/sync.list \
---log-file=$2/sync.log \
-kixx@192.168.1.$1:~/ ~/
+--exclude-from=$SYNC_DIR/sync.list \
+--log-file=$SYNC_DIR/sync.log \
+$USER@192.168.1.$IP:~/ ~/
 
 exit $?
