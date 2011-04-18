@@ -347,6 +347,7 @@ if [ $1 = 'bak' ]; then
         exit $?
     fi
     git_version /archive/bak/kris/main/ $2
+    exit $?
 fi
 
 if [ $1 = 'rbak' ]; then
