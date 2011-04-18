@@ -127,6 +127,8 @@ get_local_git_repo ()
     echo 'cloning git@github.com:kixxauth/local.git'
     cd $GITHUB_DIR
     git clone git@github.com:kixxauth/local.git
+    cd $GITHUB_DIR/local
+    git submodule init
 }
 
 update_local_git_repo ()
