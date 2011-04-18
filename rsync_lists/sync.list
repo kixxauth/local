@@ -3,11 +3,12 @@
 - development/github/local/***
 - kris_clients/Ebooq/ebooqbeta/***
 - kris_clients/Ebooq/Wrapper/wrapper-git/***
+- kris_clients/Ebooq/Platform/***
 - kris_clients/Geodelic/geodeals/***
 + .cache/google-chrome/***
 + .config/google-chrome/***
 + development/***
-+ documents/***
++ Documents/***
 + fireworksproject/***
 + .fonts/***
 + .gitconfig
