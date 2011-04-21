@@ -93,7 +93,7 @@ exit_msg ()
     echo "try:"
     echo "bak - backup and version the local home dir [commit_msg]"
     echo "rbak - backup remote directories [last IP digit] [commit_msg]"
-    echo "sync - sync machines and update locally [last IP digit]"
+    echo "sync - sync machines and update locally [last IP digit] [source username]"
     echo "update - update packages"
     echo "bin - update local scripts"
     echo "pkgs - install distro packages"
@@ -392,6 +392,11 @@ fi
 if [ $1 = 'sync' ]; then
     if [ -z $2 ]; then
         echo "the sync command needs the last digit of the target IP"
+        exit_msg
+        exit 1
+    fi
+    if [ -z $2 ]; then
+        echo "the sync command needs the username on the target machine"
         exit_msg
         exit 1
     fi
