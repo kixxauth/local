@@ -2,6 +2,7 @@
 - ***.pyc
 - kris_clients/Geodelic/geodeals/***
 - kris_clients/Ebooq/ebooqbeta/***
+- kris_clients/Ebooq/Platform/***
 - .cache/google-chrome/***
 - .macromedia/Flash_Player/***
 - .mozilla/firefox/kixx.default/Cache/***
@@ -9,6 +10,6 @@
 - .nave/***
 - .opera/cache/***
 - temp/***
-- .VirtualBox
+- .VirtualBox/***
 - vmware/***
 - .vmware/***

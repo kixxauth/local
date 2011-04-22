@@ -7,6 +7,7 @@ GITHUB_DIR=$PROJECTS_DIR/github
 GITS="\
 $GITHUB_DIR/local \
 "
+
 # TODO This should be read in from an external list file.
 MY_PACKS="\
 build-essential \
@@ -42,6 +43,9 @@ f-spot \
 rhythmbox \
 totem \
 "
+
+# Main backup tree
+MAINBAK=/archive/bak/main/kixx
 
 # For all items that are *not* to be synced between machines.
 NOSYNC_DIR=$HOME/nosync
@@ -236,32 +240,11 @@ update_bin_scripts ()
     chmod 764 $BIN_DIR/manage
 }
 
-# $1 repo dir
-# $2 commit msg
-git_version ()
-{
-    must_not_sudo
-
-    cd $1
-    git checkout master
-    if [ $? != '0' ]; then
-        echo "exiting"
-        return $?
-    fi
-
-    git add .
-    if [ -z "$2" ]; then
-        git commit -m "$(date)"
-    else
-        git commit -m "$2"
-    fi
-}
-
 # $1 source
 # $2 destination
 # $3 logfile
 # $4 exlude list
-versioned_backup ()
+backup ()
 {
     must_not_sudo
 
@@ -343,12 +326,11 @@ if [ $1 = 'bak' ]; then
     create_dirs
     update_local_git_repo
     update_bin_scripts
-    versioned_backup $HOME /archive/bak/kris/main/tree /archive/bak/kris/main/latest.log $SYNC_DIR/main_bak.list
+    backup $HOME $MAINBAK/tree $MAINBAK/latest.log $SYNC_DIR/main_bak.list
     if [ $? != '0' ]; then
         echo "exiting"
         exit $?
     fi
-    git_version /archive/bak/kris/main/ $2
     exit $?
 fi
 
