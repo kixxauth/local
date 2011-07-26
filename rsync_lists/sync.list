@@ -7,6 +7,7 @@
 - kris_clients/Geodelic/geodeals/***
 + .cache/google-chrome/***
 + .config/google-chrome/***
++ deployments/***
 + development/***
 + Documents/***
 + fireworksproject/***
