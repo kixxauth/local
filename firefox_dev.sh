@@ -1,2 +1,2 @@
 #!/bin/bash
-$HOME/local/sbin/firefox4/firefox -no-remote -P Developer
+$HOME/local/sbin/firefox5/firefox -no-remote -P Developer
