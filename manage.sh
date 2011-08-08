@@ -214,9 +214,9 @@ update_bin_scripts ()
     chmod 764 $BIN_DIR/syncpull
 
     # update the firefox scripts
-    echo 'updating '$BIN_DIR'/firefox'
-    cp $GITHUB_DIR/local/firefox.sh $BIN_DIR/firefox
-    chmod 764 $BIN_DIR/firefox
+    echo 'updating '$BIN_DIR'/firefox_dev'
+    cp $GITHUB_DIR/local/firefox_start.sh $BIN_DIR/firefox_start
+    chmod 764 $BIN_DIR/firefox_start
     echo 'updating '$BIN_DIR'/firefox_dev'
     cp $GITHUB_DIR/local/firefox_dev.sh $BIN_DIR/firefox_dev
     chmod 764 $BIN_DIR/firefox_dev
