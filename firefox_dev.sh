@@ -1,2 +1,2 @@
 #!/bin/bash
-firefox Developer
+firefox_dev Developer

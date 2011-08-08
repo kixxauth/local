@@ -1,2 +1,2 @@
 #!/bin/bash
-firefox default
+firefox_dev default
