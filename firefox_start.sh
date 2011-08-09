@@ -4,4 +4,4 @@ if [ -d /Applications/Firefox.app ]; then
 else
     cd $HOME/local/sbin/firefox5/
 fi
-firefox -no-remote -P $1
+./firefox -no-remote -P $1
