@@ -217,7 +217,7 @@ update_bin_scripts ()
     chmod 764 $BIN_DIR/syncpull
 
     # update the firefox scripts
-    echo 'updating '$BIN_DIR'/firefox_dev'
+    echo 'updating '$BIN_DIR'/firefox_start'
     cp $SCRIPTS/firefox_start.sh $BIN_DIR/firefox_start
     chmod 764 $BIN_DIR/firefox_start
     echo 'updating '$BIN_DIR'/firefox_dev'
@@ -234,8 +234,10 @@ update_bin_scripts ()
     echo 'updating '$BIN_DIR'/del_swap_files'
     cp $SCRIPTS/del_swap_files.sh $BIN_DIR/del_swap_files
     chmod 764 $BIN_DIR/del_swap_files
+    echo 'updating '$BIN_DIR'/git-report'
     cp $SCRIPTS/git-report.py $BIN_DIR/git-report
     chmod 764 $BIN_DIR/git-report
+    echo 'updating '$BIN_DIR'/sync_dirs'
     cp $SCRIPTS/sync_dirs.sh $BIN_DIR/sync_dirs
     chmod 764 $BIN_DIR/sync_dirs
 
