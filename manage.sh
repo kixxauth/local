@@ -34,6 +34,7 @@ sun-java6-plugin \
 sun-java6-fonts \
 tree \
 vim-gnome \
+encfs \
 unrar
 "
 PURGED_PACKS="\
@@ -240,6 +241,12 @@ update_bin_scripts ()
     echo 'updating '$BIN_DIR'/sync_dirs'
     cp $SCRIPTS/sync_dirs.sh $BIN_DIR/sync_dirs
     chmod 764 $BIN_DIR/sync_dirs
+    echo 'updating '$BIN_DIR'/encopen'
+    cp $SCRIPTS/encopen.sh $BIN_DIR/encopen
+    chmod 764 $BIN_DIR/encopen
+    echo 'updating '$BIN_DIR'/enclose'
+    cp $SCRIPTS/enclose.sh $BIN_DIR/enclose
+    chmod 764 $BIN_DIR/enclose
 
     # update nave
     echo 'updating '$BIN_DIR'/nave'
