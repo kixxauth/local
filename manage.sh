@@ -3,6 +3,7 @@
 # Git repos
 PROJECTS_DIR=$HOME/development
 GITHUB_DIR=$PROJECTS_DIR/github
+THISREPO=$GITHUB_DIR/local
 
 GITS="\
 $GITHUB_DIR/local \
@@ -43,6 +44,8 @@ f-spot \
 rhythmbox \
 totem \
 "
+
+SCRIPTS=$THISREPO/shell_scripts
 
 # Main backup tree
 MAINBAK=/archive/bak/main/kixx
@@ -124,14 +127,14 @@ must_not_sudo ()
 get_local_git_repo ()
 {
     must_not_sudo
-    if [ -d $GITHUB_DIR/local ]; then
-        echo 'deleting previous '$GITHUB_DIR/local
-        rm -rf $GITHUB_DIR/local
+    if [ -d $THISREPO ]; then
+        echo 'deleting previous '$THISREPO
+        rm -rf $THISREPO
     fi
     echo 'cloning git@github.com:kixxauth/local.git'
     cd $GITHUB_DIR
     git clone git@github.com:kixxauth/local.git
-    cd $GITHUB_DIR/local
+    cd $THISREPO
     git submodule init
 }
 
@@ -139,7 +142,7 @@ update_local_git_repo ()
 {
     must_not_sudo
     echo 'pulling local git repo from Github'
-    cd $GITHUB_DIR/local
+    cd $THISREPO
     git pull origin master
     git submodule update
 }
@@ -197,49 +200,53 @@ update_bin_scripts ()
 
     # update the rsync exclude list
     echo 'updating '$SYNC_DIR'/sync.list'
-    cp $GITHUB_DIR/local/rsync_lists/sync.list $SYNC_DIR/sync.list
+    cp $THISREPO/rsync_lists/sync.list $SYNC_DIR/sync.list
 
     # updating the main backup exclude list
     echo 'updating '$SYNC_DIR'/main_bak.list'
-    cp $GITHUB_DIR/local/rsync_lists/main_bak.list $SYNC_DIR/main_bak.list
+    cp $THISREPO/rsync_lists/main_bak.list $SYNC_DIR/main_bak.list
 
     # updating the toshiba backup exclude lists
     echo 'updating '$SYNC_DIR'/toshiba_A8-kris-bak.list'
-    cp $GITHUB_DIR/local/rsync_lists/toshiba_A8-kris-bak.list $SYNC_DIR/toshiba_A8-kris-bak.list
-    cp $GITHUB_DIR/local/rsync_lists/toshiba_A8-jocelyn-bak.list $SYNC_DIR/toshiba_A8-jocelyn-bak.list
+    cp $THISREPO/rsync_lists/toshiba_A8-kris-bak.list $SYNC_DIR/toshiba_A8-kris-bak.list
+    cp $THISREPO/rsync_lists/toshiba_A8-jocelyn-bak.list $SYNC_DIR/toshiba_A8-jocelyn-bak.list
 
     # update the rsync script
     echo 'updating '$BIN_DIR'/syncpull'
-    cp $GITHUB_DIR/local/syncpull.sh $BIN_DIR/syncpull
+    cp $SCRIPTS/syncpull.sh $BIN_DIR/syncpull
     chmod 764 $BIN_DIR/syncpull
 
     # update the firefox scripts
     echo 'updating '$BIN_DIR'/firefox_dev'
-    cp $GITHUB_DIR/local/firefox_start.sh $BIN_DIR/firefox_start
+    cp $SCRIPTS/firefox_start.sh $BIN_DIR/firefox_start
     chmod 764 $BIN_DIR/firefox_start
     echo 'updating '$BIN_DIR'/firefox_dev'
-    cp $GITHUB_DIR/local/firefox_dev.sh $BIN_DIR/firefox_dev
+    cp $SCRIPTS/firefox_dev.sh $BIN_DIR/firefox_dev
     chmod 764 $BIN_DIR/firefox_dev
     echo 'updating '$BIN_DIR'/firefox_user'
-    cp $GITHUB_DIR/local/firefox_user.sh $BIN_DIR/firefox_user
+    cp $SCRIPTS/firefox_user.sh $BIN_DIR/firefox_user
     chmod 764 $BIN_DIR/firefox_user
 
     # update utility scripts
     echo 'updating '$BIN_DIR'/find_swap_files'
-    cp $GITHUB_DIR/local/find_swap_files.sh $BIN_DIR/find_swap_files
+    cp $SCRIPTS/find_swap_files.sh $BIN_DIR/find_swap_files
     chmod 764 $BIN_DIR/find_swap_files
     echo 'updating '$BIN_DIR'/del_swap_files'
-    cp $GITHUB_DIR/local/del_swap_files.sh $BIN_DIR/del_swap_files
+    cp $SCRIPTS/del_swap_files.sh $BIN_DIR/del_swap_files
     chmod 764 $BIN_DIR/del_swap_files
+    cp $SCRIPTS/git-report.py $BIN_DIR/git-report
+    chmod 764 $BIN_DIR/git-report
+    cp $SCRIPTS/sync_dirs.sh $BIN_DIR/sync_dirs
+    chmod 764 $BIN_DIR/sync_dirs
 
     # update nave
     echo 'updating '$BIN_DIR'/nave'
-    cp $GITHUB_DIR/local/nave/nave.sh $BIN_DIR/nave
+    cp $THISREPO/nave/nave.sh $BIN_DIR/nave
     chmod 764 $BIN_DIR/nave
 
     # update this script
     echo 'updating '$BIN_DIR'/manage'
-    cp $GITHUB_DIR/local/manage.sh $BIN_DIR/manage
+    cp $THISREPO/manage.sh $BIN_DIR/manage
     chmod 764 $BIN_DIR/manage
 }
 
