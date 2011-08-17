@@ -346,7 +346,7 @@ if [ $1 = 'bak' ]; then
     update_local_git_repo
     update_bin_scripts
     backup $HOME $MAINBAK/tree $MAINBAK/latest.log $SYNC_DIR/main_bak.list
-    cp -R ~/.VirtualBox /archive/virtual_machines/
+    #cp -R ~/.VirtualBox /archive/virtual_machines/
     if [ $? != '0' ]; then
         echo "exiting"
         exit $?
