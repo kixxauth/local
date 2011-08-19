@@ -1,7 +1,7 @@
 - ***.swp
 - ***.pyc
 - development/github/local/***
-- development/platform_z/**
+- development/platform.*/***
 + .cache/google-chrome/***
 + .config/google-chrome/***
 + development/***
