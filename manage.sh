@@ -4,6 +4,7 @@
 PROJECTS_DIR=$HOME/development
 GITHUB_DIR=$PROJECTS_DIR/github
 THISREPO=$GITHUB_DIR/local
+DOTSREPO=$GITHUB_DIR/dotfiles
 
 GITS="\
 $GITHUB_DIR/local \
@@ -137,6 +138,7 @@ get_local_git_repo ()
     git clone git@github.com:kixxauth/local.git
     cd $THISREPO
     git submodule init
+    git submodule update
 }
 
 update_local_git_repo ()
@@ -144,6 +146,30 @@ update_local_git_repo ()
     must_not_sudo
     echo 'pulling local git repo from Github'
     cd $THISREPO
+    git pull origin master
+    git submodule update
+}
+
+get_dots_git_repo ()
+{
+    must_not_sudo
+    if [ -d $DOTSREPO ]; then
+        echo 'deleting previous '$DOTSREPO
+        rm -rf $DOTSREPO
+    fi
+    echo 'cloning git@github.com:kixxauth/dotfiles.git'
+    cd $GITHUB_DIR
+    git clone git@github.com:kixxauth/dotfiles.git
+    cd $DOTSREPO
+    git submodule init
+    git submodule update
+}
+
+update_dots_git_repo ()
+{
+    must_not_sudo
+    echo 'pulling dotfiles git repo from Github'
+    cd $DOTSREPO
     git pull origin master
     git submodule update
 }
@@ -194,6 +220,27 @@ prune_packages ()
     echo 'Removed unused packages:'
     echo $PURGED_PACKS
 }
+
+update_dotfiles ()
+{
+    must_not_sudo
+
+    echo 'updating .bashrc'
+    cp $DOTSREPO/.bashrc $HOME/.bashrc
+
+    echo 'updating .gitconfig'
+    cp $DOTSREPO/.gitconfig $HOME/.gitconfig
+
+    echo 'updating .gitignore'
+    cp $DOTSREPO/.gitignore $HOME/.gitignore
+
+    echo 'updating .vimrc'
+    cp $DOTSREPO/.vimrc $HOME/.vimrc
+
+    echo 'updating .vim/'
+    cp -R $DOTSREPO/.vim $HOME/
+}
+
 
 update_bin_scripts ()
 {
@@ -442,12 +489,17 @@ if [ $1 = 'etcbak' ]; then
     exit 0
 fi
 
+if [ $1 = 'dots' ]; then
+    update_dots_git_repo
+    update_dotfiles
+fi
+
 if [ $1 = 'bootstrap' ]; then
     create_dirs
     get_local_git_repo
     update_bin_scripts
-    cd $DIRECTORY
-    rm $0
+    get_dots_git_repo
+    update_dotfiles
     exit 0
 fi
 
