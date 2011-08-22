@@ -492,6 +492,7 @@ fi
 if [ $1 = 'dots' ]; then
     update_dots_git_repo
     update_dotfiles
+    exit 0
 fi
 
 if [ $1 = 'bootstrap' ]; then
