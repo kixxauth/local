@@ -11,31 +11,34 @@ $GITHUB_DIR/local \
 "
 
 # TODO This should be read in from an external list file.
+# ! Order matters
 MY_PACKS="\
 build-essential \
+perl \
 curl \
 elinks \
 dkms \
+flashplugin-installer \
 flashplugin-nonfree \
-gimp \
-git-core \
-iotop \
-irssi \
-keepassx \
-libssl0.9.8 \
 libssl-dev \
-mercurial \
-mplayer \
-ncftp \
-openssh-client \
+libssl0.9.8 \
 openssh-server \
+openssh-client \
+git-core \
 subversion \
+mercurial \
 sun-java6-jre \
 sun-java6-plugin \
 sun-java6-fonts \
-tree \
 vim-gnome \
+ncftp \
 encfs \
+tree \
+irssi \
+keepassx \
+iotop \
+mplayer \
+gimp \
 unrar
 "
 PURGED_PACKS="\
