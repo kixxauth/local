@@ -18,10 +18,8 @@ perl \
 curl \
 elinks \
 dkms \
-flashplugin-installer \
-flashplugin-nonfree \
-libssl-dev \
 libssl0.9.8 \
+libssl-dev \
 openssh-server \
 openssh-client \
 git-core \
