@@ -12,10 +12,15 @@ sudo apt-get autoremove --fix-missing --assume-yes
 sudo apt-get install build-essential
 sudo apt-get install libssl-dev
 
-# Nave
-wget https://raw.github.com/isaacs/nave/master/nave.sh
-
+# Nave (not used anymore)
+# wget https://raw.github.com/isaacs/nave/master/nave.sh
 # Reboot from the admin panel then install node with nave
+
+wget 'http://nodejs.org/dist/node-v0.4.11.tar.gz'
+tar -xzvf node-v0.4.11.tar.gz
+cd node-v0.4.11/
+sudo make
+sudo make install
 
 # Starting the server
 sudo nohup "<command>" "<args>" > out.log 2> err.log &

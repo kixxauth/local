@@ -5,6 +5,7 @@
 - development/platform.*/***
 + .cache/google-chrome/***
 + .config/google-chrome/***
++ .deployment/***
 + development/***
 + Documents/***
 + .enckixx/***
