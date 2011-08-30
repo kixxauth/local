@@ -295,6 +295,9 @@ update_bin_scripts ()
     echo 'updating '$BIN_DIR'/enclose'
     cp $SCRIPTS/enclose.sh $BIN_DIR/enclose
     chmod 764 $BIN_DIR/enclose
+    echo 'updating '$BIN_DIR'/mvim'
+    cp $SCRIPTS/enclose.sh $BIN_DIR/mvim
+    chmod 764 $BIN_DIR/mvim
 
     # update nave
     echo 'updating '$BIN_DIR'/nave'
