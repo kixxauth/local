@@ -3,8 +3,6 @@
 - development/github/local/***
 - development/github/dotfiles/***
 - development/platform.*/***
-+ .cache/google-chrome/***
-+ .config/google-chrome/***
 + .deployments/***
 + development/***
 + Documents/***
@@ -15,16 +13,10 @@
 + .gitignore
 + .hgrc
 + .irssi/***
-+ .jetpack/***
 + .keypassx/***
 + kris_clients/***
 + media/***
-+ .mozilla/***
 + .ncftp/***
-+ .opera/***
 + sole_proprietor/***
 + temp/***
-+ .vim/***
-+ .viminfo
-+ .vimrc
 - *

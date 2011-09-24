@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# remote server
+REMOTE="kris@kristo.us"
+
 # Git repos
 PROJECTS_DIR=$HOME/development
 GITHUB_DIR=$PROJECTS_DIR/github
@@ -310,6 +313,56 @@ update_bin_scripts ()
     chmod 764 $BIN_DIR/manage
 }
 
+curry_rsync () {
+    must_not_sudo
+
+    local src="$1"
+    local target="$2"
+    local logfile="$SYNC_DIR/$3"
+
+    # Check for the sync dir
+    if ! [ -d "$SYNC_DIR" ]; then
+        echo "could not find $SYNC_DIR"
+        echo 'try running the update script first'
+        exit 1
+    fi
+
+    # Remove the previous log
+    if [ -f "$logfile" ]; then
+        echo 'removing previous log file...'
+        rm "$logfile"
+    fi
+
+    # -r --recursive
+    # -l --links copy simlinks as simlinks (don't resolve them)
+    # -p --perms preserve permissions
+    # -t --times preserve modification times
+    # -g --group preserve group
+    # -o --owner preserve owner
+    # -u --update skip files that are newer on the receiver
+    # --del reciever deletes extraneous files during transfer
+    # --commpress compress data
+    # --exclude-from=FILE read exclude patterns from file
+    # --human-readable
+    # --progress
+    # --log-file=FILE
+
+    rsync \
+    --recursive \
+    --links \
+    --perms \
+    --times \
+    --group \
+    --owner \
+    --del \
+    --compress \
+    --progress \
+    --human-readable \
+    --exclude-from="$logfile" \
+    --log-file="$logfile" \
+    "$src" "$target"
+}
+
 # $1 source
 # $2 destination
 # $3 logfile
@@ -442,26 +495,13 @@ if [ $1 = 'rbak' ]; then
     exit $?
 fi
 
-if [ $1 = 'sync' ]; then
-    if [ -z $2 ]; then
-        echo "the sync command needs the last digit of the target IP"
-        exit_msg
-        exit 1
-    fi
-    if [ -z $2 ]; then
-        echo "the sync command needs the username on the target machine"
-        exit_msg
-        exit 1
-    fi
-    create_dirs
-    update_local_git_repo
-    update_bin_scripts
-    ~/local/bin/syncpull $2 $3 $SYNC_DIR
-    if [ $? != '0' ]; then
-        echo "exiting"
-        exit $?
-    fi
-    vim $SYNC_DIR/sync.log
+if [ $1 = 'pull' ]; then
+    curry_rsync "$REMOTE:~/" "$HOME/" "pull-sync.log"
+    exit 0
+fi
+
+if [ $1 = 'push' ]; then
+    curry_rsync "$HOME/" "$REMOTE:~/" "push-sync.log"
     exit 0
 fi
 
