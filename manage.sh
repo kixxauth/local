@@ -229,8 +229,13 @@ update_dotfiles ()
 {
     must_not_sudo
 
-    echo 'updating .bashrc'
-    cp $DOTSREPO/.bashrc $HOME/.bashrc
+    if [ $(uname) = Darwin ]; then
+        echo 'updating .profile'
+        cp $DOTSREPO/.bashrc $HOME/.profile
+    else
+        echo 'updating .bashrc'
+        cp $DOTSREPO/.bashrc $HOME/.bashrc
+    fi
 
     echo 'updating .gitconfig'
     cp $DOTSREPO/.gitconfig $HOME/.gitconfig
