@@ -333,6 +333,8 @@ curry_rsync () {
         rm "$logfile"
     fi
 
+    touch "$logfile"
+
     # -r --recursive
     # -l --links copy simlinks as simlinks (don't resolve them)
     # -p --perms preserve permissions
