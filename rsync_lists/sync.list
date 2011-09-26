@@ -1,8 +1,10 @@
 - ***.swp
 - ***.pyc
+- ***.DS_Store
 - development/github/local/***
 - development/github/dotfiles/***
 - development/platform.*/***
+- fireworksproject/apps/***
 + .deployments/***
 + development/***
 + Documents/***
