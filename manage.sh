@@ -353,7 +353,6 @@ curry_rsync () {
     # --human-readable
     # --progress
     # --log-file=FILE
-
     rsync \
     --recursive \
     --links \
@@ -365,7 +364,7 @@ curry_rsync () {
     --compress \
     --progress \
     --human-readable \
-    --exclude-from="$logfile" \
+    --exclude-from="$SYNC_DIR/sync.list" \
     --log-file="$logfile" \
     "$src" "$target"
 }
@@ -503,12 +502,12 @@ if [ $1 = 'rbak' ]; then
 fi
 
 if [ $1 = 'pull' ]; then
-    curry_rsync "$REMOTE:~/" "$HOME/" "pull-sync.log"
+    curry_rsync "$REMOTE:~/sync/" "$HOME/" "pull-sync.log"
     exit 0
 fi
 
 if [ $1 = 'push' ]; then
-    curry_rsync "$HOME/" "$REMOTE:~/" "push-sync.log"
+    curry_rsync "$HOME/" "$REMOTE:~/sync/" "push-sync.log"
     exit 0
 fi
 
