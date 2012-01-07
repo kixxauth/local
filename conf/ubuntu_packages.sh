@@ -1,5 +1,6 @@
 UBUNTU_PACKAGES="\
 build-essential \
+curl \
 vim-gnome \
 git-core \
 subversion \

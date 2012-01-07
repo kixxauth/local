@@ -1,4 +1,5 @@
 #!/bin/bash
+source "$LIBDIR/utils.sh"
 
 super_or_fail 'to update system'
 

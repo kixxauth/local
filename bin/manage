@@ -1,30 +1,4 @@
-#!/bin/bash
-THISDIR="$(cd `dirname "$0"` && pwd)"
-ROOTDIR="$( dirname "$THISDIR" )"
-CONFDIR="$ROOTDIR/conf"
-
-fail () {
-	echo "$@" >&2
-	exit 1
-}
-
-export -f fail
-
-super_user () {
-    [ "$(id -u)" == "0" ] || return 1
-}
-
-export -f super_user
-
-super_or_fail () {
-    local msg="$1"
-    super_user || fail "Super user priv required $msg"
-}
-
-export -f super_or_fail
-
 main () {
-    source "$CONFDIR/conf.sh"
 	local cmd="$1"
 	case $cmd in
 		'bootstrap')
@@ -35,14 +9,6 @@ main () {
 			echo "exiting without running any operations"
 			;;
 	esac
-}
-
-bootstrap () {
-    local packages="$CONFDIR/packages.list"
-    $THISDIR/update_system.sh
-    apt-get install --assume-yes --fix-missing $UBUNTU_PACKAGES
-    apt-get autoremove --assume-yes --fix-missing
-    apt-get clean
 }
 
 main "$@"

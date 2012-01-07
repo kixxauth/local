@@ -1,0 +1,23 @@
+#!/bin/bash
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+CONFDIR="$ROOTDIR/conf"
+export LIBDIR="$ROOTDIR/lib"
+
+source "$LIBDIR/utils.sh"
+
+main () {
+    local ubuntu_packages="$CONFDIR/ubuntu_packages.sh"
+
+    if ! [ -f $ubuntu_packages ]; then
+        fail "conf file $ubuntu_packages does not exist"
+    fi
+    source $ubuntu_packages
+    ( $THISDIR/update_ubuntu_system.sh \
+        || fail "could not update system"
+      $THISDIR/install_ubuntu_packages.sh $UBUNTU_PACKAGES \
+        || fail "could not install packages"
+    ) || fail "giving up"
+}
+
+main "$@"
