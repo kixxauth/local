@@ -1,4 +1,12 @@
 #!/bin/bash
+
+# This script is used to install the minimum amount of Ubuntu packages onto a
+# bare bones system required to get a working system with a scripting language
+# which can take over for Bash.
+#
+# ! This script must be able to be idempotent; able to run over and over with
+# no adverse effects. It can be used as a basic system update/upgrade tool.
+
 THISDIR="$(cd `dirname "$0"` && pwd)"
 ROOTDIR="$( dirname "$THISDIR" )"
 CONFDIR="$ROOTDIR/conf"
