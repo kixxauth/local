@@ -1,0 +1,37 @@
+#!/bin/bash
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+LIBDIR="$ROOTDIR/lib"
+source "$LIBDIR/utils.sh"
+
+if [ -z $1 ]; then
+    echo "Mirror files from a src to a destination without deleting"
+    echo
+    echo "  <src> <dest> <excludefile> <logfile>"
+    echo
+    echo "! <src> and <dest> directory names to *not* need to have a trailing /"
+    exit 0
+fi
+
+main () {
+    local src="$1"
+    local dest="$2"
+    local excludefile="$3"
+    local logfile="$4"
+    local options="\
+        --recursive \
+        --links \
+        --perms \
+        --times \
+        --owner \
+        --progress \
+        --human-readable \
+        "
+
+    options="$options --exclude-from=$excludefile"
+    options="$options --log-file=$logfile"
+
+    rsync $options "$src/" "$dest/" || fail "$0: rsync failed"
+}
+
+main "$@"
