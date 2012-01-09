@@ -1,0 +1,1 @@
+LOGDIR="$HOME/.mylogs"
