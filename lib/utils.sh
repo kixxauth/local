@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DATE_TODAY="$(date +%Y-%m-%d)"
+
 fail () {
 	echo "$@" >&2
 	exit 1
