@@ -1,0 +1,12 @@
+- ***.swp
+- ***.pyc
+- .adobe/***
+- .cache/***
+- .macromedia/***
+- .mozilla/firefox/kixx.default/Cache/***
+- .mozilla/firefox/kixx.Developer/Cache/***
+- .mylogs/snapbak.log
+- .opera/cache/***
+- Temp/***
+- .VirtualBox/*.vdi
+- VirtualBox_VMs/***

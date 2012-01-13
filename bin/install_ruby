@@ -1,0 +1,41 @@
+#!/bin/bash
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+CONFDIR="$ROOTDIR/conf"
+LIBDIR="$ROOTDIR/lib"
+TEMPDIR="$ROOTDIR/temp"
+
+source "$LIBDIR/utils.sh"
+
+main () {
+    local version=$( cat "$CONFDIR/ruby.version" )
+
+    if [ -z $version ]; then
+        fail "No Ruby version specified"
+    fi
+
+    local ruby_info
+    ruby_info=$( ruby --version ) || install_ruby "$version"
+    echo $ruby_info
+}
+
+parse_ruby_output () {
+    installed_version="$2"
+}
+
+install_ruby () {
+    local version="$1"
+    local url="ftp://ftp.ruby-lang.org/pub/ruby/ruby-$version.tar.bz2"
+    echo "Installing Ruby $version"
+    echo "From $url"
+
+    ensure_dir "$TEMPDIR/ruby"
+
+    curl -# -L "$url" \
+        | tar xjf - -C "$TEMPDIR/ruby" --strip-components=1 \
+        || fail "Could not download Ruby"
+
+    rmdir "$TEMPDIR/ruby"
+}
+
+main "$@"

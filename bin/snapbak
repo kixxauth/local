@@ -1,0 +1,23 @@
+#!/bin/bash
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+LIBDIR="$ROOTDIR/lib"
+CONFDIR="$ROOTDIR/conf"
+
+source "$CONFDIR/conf.sh"
+source "$LIBDIR/utils.sh"
+
+main () {
+    local src="$HOME"
+    local dest="/archive/snapbak/kixx"
+    local logfile="$LOGDIR/snapbak.log"
+    local excludefile="$CONFDIR/snapbak_exclude.list"
+
+    ensure_dir $LOGDIR
+    ensure_dir $dest
+
+    "$THISDIR/rsync_append.sh" $src $dest $logfile $excludefile \
+        || fail "Unable to do snapbak"
+}
+
+main "$@"

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+sudo apt-get install git-core
+
+localdir="$HOME/local"
+
+if [ -d "$localdir" ]; then
+    rm -rf "$localdir"
+fi
+
+cd $HOME
+git clone git@github.com:kixxauth/local.git
+
+PATH="$HOME/local/bin:$PATH"
+
+echo "OK - toehold is done"

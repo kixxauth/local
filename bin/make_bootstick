@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $( uname ) == "Darwin" ]; then
+    target="/Volumes/keys"
+else
+    target="/media/keys"
+fi
+
+if ! [ -d "$target" ]; then
+    echo "target $target does not exist"
+    echo "Is the drive plugged in?"
+    exit 1
+fi
+
+sudo cp -R "$HOME/.ssh" "$target/"
+sudo cp "$HOME/local/toehold" "$target/"
+sudo ls -al "$target"
+sudo tree -a "$target/.ssh"
