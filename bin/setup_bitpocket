@@ -1,9 +1,0 @@
-#!/bin/bash
-THISDIR="$(cd `dirname "$0"` && pwd)"
-ROOTDIR="$( dirname "$THISDIR" )"
-CONFDIR="$ROOTDIR/conf"
-
-rm -rf "$HOME/.bitpocket/"
-cd "$HOME"
-bitpocket init kris@kristo.us /home/kris/Bitpocket_home_master
-cp "$CONFDIR/bitpocket_exclude.list" "$HOME/.bitpocket/exclude"

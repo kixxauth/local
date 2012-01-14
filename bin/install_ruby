@@ -3,9 +3,11 @@ THISDIR="$(cd `dirname "$0"` && pwd)"
 ROOTDIR="$( dirname "$THISDIR" )"
 CONFDIR="$ROOTDIR/conf"
 LIBDIR="$ROOTDIR/lib"
-TEMPDIR="$ROOTDIR/temp"
+RUBYDIR="$HOME/tmp/ruby_install"
 
 source "$LIBDIR/utils.sh"
+
+installed_version=""
 
 main () {
     local version=$( cat "$CONFDIR/ruby.version" )
@@ -14,9 +16,17 @@ main () {
         fail "No Ruby version specified"
     fi
 
-    local ruby_info
-    ruby_info=$( ruby --version ) || install_ruby "$version"
-    echo $ruby_info
+    echo 'Checking for Ruby...'
+    local ruby_info=$( ruby --version )
+
+    parse_ruby_output $ruby_info
+
+    if [ -z $ruby_info ] || [ "$installed_version" != "$version" ]; then
+        install_ruby "$version"
+    fi
+
+    ruby_info=$( ruby --version )
+    echo "$ruby_info installed"
 }
 
 parse_ruby_output () {
@@ -25,17 +35,27 @@ parse_ruby_output () {
 
 install_ruby () {
     local version="$1"
-    local url="ftp://ftp.ruby-lang.org/pub/ruby/ruby-$version.tar.bz2"
     echo "Installing Ruby $version"
-    echo "From $url"
 
-    ensure_dir "$TEMPDIR/ruby"
+    fetch_ruby "$version"
+    cd "$RUBYDIR"
+    "$RUBYDIR/configure" || fail "Unable to configure Ruby"
+    make || fail "Unable to make Ruby"
+    make test || fail "Ruby build failed tests"
+    sudo make install || fail "Unable to install Ruby"
+    rm -rf "$RUBYDIR"
+}
+
+fetch_ruby () {
+    local version="$1"
+    local url="ftp://ftp.ruby-lang.org/pub/ruby/ruby-$version.tar.bz2"
+    echo "Fetching Ruby from $url"
+
+    ensure_dir "$RUBYDIR"
 
     curl -# -L "$url" \
-        | tar xjf - -C "$TEMPDIR/ruby" --strip-components=1 \
+        | tar xjf - -C "$RUBYDIR" --strip-components=1 \
         || fail "Could not download Ruby"
-
-    rmdir "$TEMPDIR/ruby"
 }
 
 main "$@"

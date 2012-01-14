@@ -14,5 +14,6 @@ fi
 
 sudo cp -R "$HOME/.ssh" "$target/"
 sudo cp "$HOME/local/toehold" "$target/"
+sudp cp "$HOME/.gitconfig" "$target/"
 sudo ls -al "$target"
 sudo tree -a "$target/.ssh"
