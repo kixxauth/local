@@ -6,10 +6,19 @@ RX_REPO = /(?<dir>[^\/]+)\.git$/
 File.open(REPO_LIST, 'r').each do |line|
     if RX_REPO =~ line
         dirname = "#{REFDIR}/#{$~[:dir]}"
+
+        Dir.chdir(REFDIR)
         if File.directory?(dirname)
-            puts 'its a directory'
+            Dir.chdir(dirname)
+            if %x[ git pull origin master ]
+                puts "git pulled #{line}"
+            else
+                puts "! ERROR: unable to git pull #{line}"
+            end
+        elsif %x[ git clone #{line}]
+            puts "git cloned #{line}"
         else
-            puts 'its not a directory'
+            puts "! ERROR: unable to git clone #{line}"
         end
     end
 end
