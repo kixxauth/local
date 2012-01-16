@@ -1,0 +1,42 @@
+#!/bin/bash
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+LIBDIR="$ROOTDIR/lib"
+CONFDIR="$ROOTDIR/conf"
+
+source "$CONFDIR/conf.sh"
+source "$LIBDIR/utils.sh"
+
+main () {
+    local cmd="$1"
+    local remote="kris@kristo.us:~/Homesync"
+    local logfile="$LOGDIR/sync.log"
+    local excludefile="$CONFDIR/sync_exclude.list"
+
+    ensure_dir $LOGDIR
+
+    case $cmd in
+        'push')
+            "$THISDIR/rsync_append.sh" "$HOME" "$remote" "$logfile" "$excludefile" \
+                || fail "Unable to do rsync_append.sh"
+            ;;
+        'pull')
+            "$THISDIR/rsync_append.sh" "$remote" "$HOME" "$logfile" "$excludefile" \
+                || fail "Unable to do rsync_append.sh"
+            ;;
+        'push-delete')
+            "$THISDIR/rsync_merge.sh" "$HOME" "$remote" "$logfile" "$excludefile" \
+                || fail "Unable to do rsync_append.sh"
+            ;;
+        'pull-delete')
+            "$THISDIR/rsync_merge.sh" "$remote" "$HOME" "$logfile" "$excludefile" \
+                || fail "Unable to do rsync_append.sh"
+            ;;
+        * )
+            echo "no command; exiting without running any operations"
+            echo "use one of push, pull, push-delete, or pull-delete"
+            ;;
+    esac
+}
+
+main "$@"
