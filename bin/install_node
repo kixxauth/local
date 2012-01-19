@@ -40,7 +40,7 @@ install_node () {
 
 fetch_node () {
     local version="$1"
-    local url="http://nodejs.org/dist/v$version/node-v$version.tar.gz"
+    local url="http://nodejs.org/dist/$version/node-$version.tar.gz"
     echo "Fetching Node.js from $url"
 
     ensure_dir "$NODEDIR"
