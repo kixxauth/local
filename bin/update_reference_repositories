@@ -1,2 +1,3 @@
 #!/bin/bash
-ruby "$HOME/local/lib/update_reference_projects.rb"
+ruby "$HOME/local/lib/update_reference_projects.rb" \
+    || echo "unable to update reference projects" && exit 1

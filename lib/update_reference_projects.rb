@@ -3,7 +3,14 @@ REFDIR = "#{HOME}/Rprojects/Reference"
 REPO_LIST = "#{REFDIR}/git_repository.list"
 RX_REPO = /(?<dir>[^\/]+)\.git$/
 
-File.open(REPO_LIST, 'r').each do |line|
+begin
+    fd = File.open(REPO_LIST, 'r')
+rescue
+    puts "It looks like #{REPO_LIST} does not exist yet."
+    Process.exit 1
+end
+
+fd.each do |line|
     if RX_REPO =~ line
         dirname = "#{REFDIR}/#{$~[:dir]}"
 
