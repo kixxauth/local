@@ -21,7 +21,7 @@ main () {
 
     parse_ruby_output $ruby_info
 
-    if [ -z $ruby_info ] || [ "$installed_version" != "$version" ]; then
+    if [ -z "$ruby_info" ] || [ "$installed_version" != "$version" ]; then
         install_ruby "$version"
     fi
 
@@ -43,6 +43,11 @@ install_ruby () {
     make || fail "Unable to make Ruby"
     make test || fail "Ruby build failed tests"
     sudo make install || fail "Unable to install Ruby"
+
+    if [ -f /usr/bin/ruby ]; then
+        sudo mv /usr/bin/ruby /usr/bin/ruby-old
+    fi
+
     rm -rf "$RUBYDIR"
 }
 
