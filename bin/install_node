@@ -1,0 +1,53 @@
+#!/bin/bash
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+CONFDIR="$ROOTDIR/conf"
+LIBDIR="$ROOTDIR/lib"
+NODEDIR="$HOME/tmp/node_install"
+
+source "$LIBDIR/utils.sh"
+
+main () {
+    local version=$( cat "$CONFDIR/node.version" )
+
+    if [ -z $version ]; then
+        fail "No Node.js version specified"
+    fi
+
+    echo 'Checking for Node.js ...'
+    local installed_version=$( node --version )
+
+    if [ "$installed_version" != "$version" ]; then
+        install_node "$version"
+    fi
+
+    installed_version=$( node --version )
+    echo "Node.js $installed_version installed"
+}
+
+install_node () {
+    local version="$1"
+    echo "Installing Node.js $version"
+
+    fetch_node "$version"
+    cd "$NODEDIR"
+    "$NODEDIR/configure" || fail "Unable to configure Node.js"
+    make || fail "Unable to make Node.js"
+    sudo make install || fail "Unable to install Node.js"
+
+    rm -rf "$NODEDIR"
+}
+
+fetch_node () {
+    local version="$1"
+    local url="http://nodejs.org/dist/v$version/node-v$version.tar.gz"
+    echo "Fetching Node.js from $url"
+
+    ensure_dir "$NODEDIR"
+
+    curl -# -L "$url" \
+        | tar xzf - -C "$NODEDIR" --strip-components=1 \
+        || fail "Could not download Node.js $version"
+}
+
+main "$@"
