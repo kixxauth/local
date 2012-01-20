@@ -9,32 +9,51 @@ source "$LIBDIR/utils.sh"
 
 main () {
     local cmd="$1"
+    local dowrite="$2"
     local remote="kris@kristo.us:~/Homesync"
     local logfile="$LOGDIR/sync.log"
     local excludefile="$CONFDIR/sync_exclude.list"
 
     ensure_dir $LOGDIR
 
+    opts="\
+    --recursive \
+    --compress \
+    --links \
+    --perms \
+    --times \
+    --owner \
+    --progress \
+    --human-readable \
+    --log-file="$logfile" \
+    --exclude-from="$excludefile" \
+    "
+
+    if [ "$dowrite" != "-w" ]; then
+        opts="--dry-run $opts"
+    fi
+
     case $cmd in
         'push')
-            "$THISDIR/rsync_append.sh" "$HOME" "$remote" "$logfile" "$excludefile" \
-                || fail "Unable to do rsync_append.sh"
+            rsync $opts "$HOME/" "$remote/" || fail "$0: rsync failed"
             ;;
         'pull')
-            "$THISDIR/rsync_append.sh" "$remote" "$HOME" "$logfile" "$excludefile" \
-                || fail "Unable to do rsync_append.sh"
+            rsync $opts "$remote/" "$HOME/" || fail "$0: rsync failed"
             ;;
         'push-delete')
-            "$THISDIR/rsync_merge.sh" "$HOME" "$remote" "$logfile" "$excludefile" \
-                || fail "Unable to do rsync_append.sh"
+            opts = "--delete $opts"
+            rsync $opts "$HOME/" "$remote/" || fail "$0: rsync failed"
             ;;
         'pull-delete')
-            "$THISDIR/rsync_merge.sh" "$remote" "$HOME" "$logfile" "$excludefile" \
-                || fail "Unable to do rsync_append.sh"
+            opts = "--delete $opts"
+            rsync $opts "$remote/" "$HOME/" || fail "$0: rsync failed"
             ;;
         * )
-            echo "no command; exiting without running any operations"
-            echo "use one of push, pull, push-delete, or pull-delete"
+            echo "Possible commands:"
+            echo "  push, pull, push-delete, or pull-delete"
+            echo ""
+            echo "Warning! sync defaults to --dry-run. To actually do the sync"
+            echo "operation, you need to pass the -w option after the command"
             ;;
     esac
 }

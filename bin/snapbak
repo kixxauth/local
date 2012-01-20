@@ -16,8 +16,17 @@ main () {
     ensure_dir $LOGDIR
     ensure_dir $dest
 
-    "$THISDIR/rsync_append.sh" $src $dest $logfile $excludefile \
-        || fail "Unable to do snapbak"
+    rsync \
+        --recursive \
+        --links \
+        --perms \
+        --times \
+        --owner \
+        --progress \
+        --human-readable \
+        --log-file="$logfile" \
+        --exclude-from="$excludefile" \
+        "$src/" "$dest/" || fail "$0: rsync failed"
 }
 
 main "$@"
