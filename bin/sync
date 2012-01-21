@@ -41,12 +41,10 @@ main () {
             rsync $opts "$remote/" "$HOME/" || fail "$0: rsync failed"
             ;;
         'push-delete')
-            opts = "--delete $opts"
-            rsync $opts "$HOME/" "$remote/" || fail "$0: rsync failed"
+            rsync --delete $opts "$HOME/" "$remote/" || fail "$0: rsync failed"
             ;;
         'pull-delete')
-            opts = "--delete $opts"
-            rsync $opts "$remote/" "$HOME/" || fail "$0: rsync failed"
+            rsync --delete $opts "$remote/" "$HOME/" || fail "$0: rsync failed"
             ;;
         * )
             echo "Possible commands:"
