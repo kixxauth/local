@@ -8,8 +8,6 @@ CONFDIR="$ROOTDIR/conf"
 source "$CONFDIR/conf.sh"
 source "$LIBDIR/utils.sh"
 
-super_or_fail "to backup /etc dir"
-
 main () {
     ensure_dir "$BAKDIR"
 
@@ -17,7 +15,7 @@ main () {
     local full_name="$BAKDIR/etc-$name-$DATE_TODAY.tar.bz2"
 
     echo 'backing /etc dir up to '$full_name
-    tar -cjf $full_name /etc || fail "Unable to tar archive"
+    sudo tar -cjf $full_name /etc || fail "Unable to tar archive"
 
     echo 'done OK'
 }
