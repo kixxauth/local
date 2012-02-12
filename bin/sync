@@ -22,7 +22,9 @@ main () {
     --links \
     --perms \
     --times \
+    --omit-dir-times \
     --owner \
+    --group \
     --progress \
     --human-readable \
     --log-file="$logfile" \
@@ -35,12 +37,14 @@ main () {
 
     case $cmd in
         'push')
+            opts="--partial $opts"
             rsync $opts "$HOME/" "$remote/" || fail "$0: rsync failed"
             ;;
         'pull')
             rsync $opts "$remote/" "$HOME/" || fail "$0: rsync failed"
             ;;
         'push-delete')
+            opts="--partial $opts"
             rsync --delete $opts "$HOME/" "$remote/" || fail "$0: rsync failed"
             ;;
         'pull-delete')
