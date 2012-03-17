@@ -4,9 +4,9 @@
 - ***.localized
 - ***.~*
 + /Clients/***
-+ /Documents/***
 + /Downloads/***
 + /fireworksproject/***
++ /FireworksProject/***
 + /.fontconfig/***
 + /.fonts/***
 + /.gitconfig
