@@ -17,6 +17,7 @@
 + /.ncftp/***
 - /Pictures/iPhoto***
 + /Pictures/***
++ /.priv/***
 + /tmp/***
 + /Videos/***
 - *
