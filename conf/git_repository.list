@@ -1,5 +1,6 @@
 git://github.com/documentcloud/backbone.git
 git://github.com/joshuaclayton/blueprint-css.git
+git://github.com/twitter/bootstrap.git
 git://github.com/clement/clutch.git
 git://github.com/senchalabs/connect.git
 git://github.com/cloudhead/cradle.git
