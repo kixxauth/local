@@ -6,8 +6,6 @@ ROOTDIR = File.dirname(LIBDIR)
 CONFDIR = File.join(ROOTDIR, 'conf')
 REPO_LIST = File.join(CONFDIR, 'git_repository.list')
 
-puts LIBDIR
-
 begin
     fd = File.open(REPO_LIST, 'r')
 rescue
