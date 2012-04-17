@@ -15,6 +15,7 @@
 - /Music/iTunes***
 + /Music/***
 + /.ncftp/***
++ /.npmrc
 - /Pictures/iPhoto***
 + /Pictures/***
 + /.priv/***
