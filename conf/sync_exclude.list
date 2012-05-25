@@ -3,15 +3,13 @@
 - ***.DS_Store
 - ***.localized
 - ***.~*
-+ /Clients/***
++ /Data/***
 + /Downloads/***
-+ /fireworksproject/***
 + /FireworksProject/***
 + /.fontconfig/***
 + /.fonts/***
 + /.gitconfig
 + /.irssi/***
-+ /Lprojects/***
 - /Music/iTunes***
 + /Music/***
 + /.ncftp/***
