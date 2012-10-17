@@ -4,6 +4,7 @@
 - ***.localized
 - ***.~*
 + /Assets/***
++ /.corkboard-scripts/***
 + /Data/***
 + /Downloads/***
 + /.enginemill.json
