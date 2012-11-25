@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ $( uname ) == "Darwin" ]; then
-    target="/Volumes/keys"
+    target="/Volumes/KEYS"
 else
-    target="/media/keys"
+    target="/media/KEYS"
 fi
 
 if ! [ -d "$target" ]; then
@@ -15,5 +15,6 @@ fi
 sudo cp -R "$HOME/.ssh" "$target/"
 sudo cp "$HOME/local/toehold" "$target/"
 sudo cp "$HOME/.gitconfig" "$target/"
+sudo cp "$HOME/.gitignore_master" "$target/"
 sudo ls -al "$target"
 sudo tree -a "$target/.ssh"
