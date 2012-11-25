@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install git-core
+sudo apt-get install -y git-core
 
 localdir="$HOME/local"
 
