@@ -12,7 +12,13 @@ main () {
     ensure_dir "$BAKDIR"
 
     local name="$( hostname -f )"
-    local full_name="$BAKDIR/etc-$name-$DATE_TODAY.tar.bz2"
+    local uname=""
+
+    if [ ! -z $1 ]; then
+        uname="-$1"
+    fi
+
+    local full_name="$BAKDIR/etc-$name-$DATE_TODAY$uname.tar.bz2"
 
     echo 'backing /etc dir up to '$full_name
     sudo tar -cjf $full_name /etc || fail "Unable to tar archive"
