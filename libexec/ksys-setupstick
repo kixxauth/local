@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+# Usage: ksys setupstick
+# Summary: Create a USB stick for initializing a new machine.
+# Help: Copies SSH keys, toehold script, and other goodies onto a specially
+# named USB stick. Make sure the stick is plugged in and named 'KEYS'.
+
+from os import path, environ
+import shutil
+
+from lib import myutil, pyutil
+
+def main():
+    target = myutil.key_usb_path()
+
+    if not path.isdir(target):
+        pyutil.exit("""\
+                Target path '%s' does not exist.
+                Is the drive plugged in?""" % target)
+
+    home = path.expanduser('~')
+    ssh_target = path.join(target, 'ssh')
+    ssh_src = path.join(home, '.ssh')
+
+    # Copy SSH keys.
+    pyutil.replace_dir(ssh_src, ssh_target)
+
+    # Copy .gitconfig.
+    shutil.copy(path.join(home, '.gitconfig'), path.join(target, '.gitconfig'))
+
+    # Copy .gitignore.
+    shutil.copy(
+            path.join(home, '.gitignore_master'),
+            path.join(target, '.gitignore_master'))
+
+    # Copy setup.py init script.
+    shutil.copy(
+            path.join(environ['_KSYS_ROOT'], 'scripts', 'setup.py'),
+            path.join(target, 'setup.py'))
+
+    print "Done. Check '%s' to see your handy work." % target
+
+
+if __name__ == '__main__':
+    main()
