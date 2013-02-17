@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: k sync <command> [--delete] [--write]
+# Usage: k sync <command> [--write]
 # Summary: Sync files and folders between machines.
 # Help: Used primarily as another "Dropbox".
 #
