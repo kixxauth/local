@@ -1,9 +1,0 @@
-#!/bin/bash
-
-basepath="/usr/bin"
-
-if [ -d /Applications/Firefox.app ]; then
-    basepath="/Applications/Firefox.app/Contents/MacOS"
-fi
-
-"$basepath/firefox" -no-remote -P Developer
