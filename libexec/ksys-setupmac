@@ -9,7 +9,9 @@ import subprocess
 from lib import pyutil
 
 def main():
-    install_homebrew = path.join(environ['_KSYS_ROOT'], 'install-homebrew.rb')
+    root = environ['_KSYS_ROOT']
+
+    install_homebrew = path.join(root, 'scripts', 'install-homebrew.rb')
     if subprocess.call(['ruby', install_homebrew]) is not 0:
         pyutil.exit("""\
                 There was a problem in the homebrew install script: '%s'.
