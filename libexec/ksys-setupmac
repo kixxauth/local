@@ -10,45 +10,56 @@ from lib import pyutil
 
 _KSYS_ROOT = environ['_KSYS_ROOT']
 
+
 def main():
+    # Install dotfiles
+    ksys = path.join(_KSYS_ROOT, 'bin', 'ksys')
+    msg = "There was a problem installing the 'dotfiles'."
+    pyutil.sub_or_exit("%s install dotfiles" % ksys, msg)
+
+    # Install Homebrew.
     install_homebrew()
+
+    # Install the Homebrew version of Git.
     install_git()
-    if subprocess.call([path.join(_KSYS_ROOT, 'bin', 'ksys'), 'install', 'dotfiles']) is not 0:
-        pyutil.exit("""\
-                There was a problem installing the 'dotfiles'.
-                """)
 
     print "Done."
     print "You'll probably want to restart your shell."
+    return
 
 
 def install_homebrew():
     if path.exists('/usr/local/bin/brew'):
         print "Homebrew already installed."
+        homebrew_doctor()
         return
 
-    install_homebrew = path.join(_KSYS_ROOT, 'scripts', 'install-homebrew.rb')
+    # Install Homebrew.
+    installer = path.join(_KSYS_ROOT, 'scripts', 'install-homebrew.rb')
+    msg = """There was a problem in the homebrew install script: '%s'.
+        """ % installer
+    pyutil.sub_or_exit("ruby %s" % installer, msg)
+    homebrew_doctor()
 
-    if subprocess.call(['ruby', install_homebrew]) is not 0:
-        pyutil.exit("""\
-                There was a problem in the homebrew install script: '%s'.
-                """ % install_homebrew)
-
-    if subprocess.call(['brew', 'doctor']) is not 0:
-        pyutil.exit("""\
-                There is a problem with the homebrew installation.
-                """)
     print "Homebrew installed."
+    return
+
+
+def homebrew_doctor():
+    # Run the doctor.
+    msg = "There is a problem with the homebrew installation."
+    pyutil.sub_or_exit("brew doctor", msg)
+    return
 
 
 def install_git():
     if path.exists('/usr/local/bin/git'):
         print "Git already installed via Homebrew."
+        return
 
-    if subprocess.call(['brew', 'install', 'git', 'bash-completion']) is not 0:
-        pyutil.exit("""\
-                There was a problem installing git with homebrew.
-                """)
+    # Install git with bash-completion
+    msg = "There was a problem installing git with homebrew."
+    pyutil.sub_or_exit('brew install git bash-completion', msg)
 
     print "Homebrew installed git."
 

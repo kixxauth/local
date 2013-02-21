@@ -1,7 +1,14 @@
 import sys
 from os import path
+import subprocess
 import shutil
 import textwrap
+
+
+def sub_or_exit(cmd, errmsg):
+    args = cmd.split()
+    if subprocess.call(args) is not 0:
+        exit(errmsg)
 
 
 def exit(msg):
