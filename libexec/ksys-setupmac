@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+# Usage: ksys setupmac
+# Summary: Setup a fresh OS X install.
+# Help: Sets up my personal work environment for Mac OS X in an idempotent way.
+
+from os import path, environ
+import subprocess
+
+from lib import pyutil
+
+def main():
+    install_homebrew = path.join(environ['_KSYS_ROOT'], 'install-homebrew.rb')
+    if subprocess.call(['ruby', install_homebrew]) is not 0:
+        pyutil.exit("""\
+                There was a problem in the homebrew install script: '%s'.
+                """ % install_homebrew)
+
+    print "Done."
+
+
+if __name__ == '__main__':
+    main()
