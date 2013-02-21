@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Usage: ksys install <package>
+# Summary: Installs packages which don't use system installers.
+# Help: Installs dotfiles and the like.
+#
+# COMMANDS
+#   dotfiles    Pull and install the 'dotfiles' repo.
+
+THISDIR="$(cd `dirname "$0"` && pwd)"
+LIBDIR="$THISDIR/lib"
+
+source "$LIBDIR/utils.sh"
+
+main () {
+    local cmd="$1"
+
+    case $cmd in
+        'dotfiles')
+            install_dotfiles "$@"
+            ;;
+        * )
+            echo "COMMANDS"
+            echo "  dotfiles    Pull and install the 'dotfiles' repo."
+            exit 2
+            ;;
+    esac
+}
+
+install_dotfiles () {
+    local dotfiles="$RPROJECTS/dotfiles"
+    if ! [ -d "$dotfiles" ]; then
+        cd "$RPROJECTS"
+        git clone git@github.com:kixxauth/dotfiles.git
+    fi
+
+    cd "$dotfiles"
+    ( git pull origin master \
+        || fail "could not pull the 'dotfiles' git repository."
+      git submodule init \
+        || fail "could not initialize 'dotfiles' submodules"
+      git submodule update \
+        || fail "could not update 'dotfiles' submodules"
+      "$dotfiles/bin/deploy" \
+        || fail "unable to deploy dotfiles"
+    ) || fail "giving up"
+
+    echo "dotfiles installed."
+    echo "You'll probably want to restart your shell."
+}
+
+main "$@"
