@@ -10,6 +10,8 @@ def sub_or_exit(cmd, errmsg):
     if subprocess.call(args) is not 0:
         exit(errmsg)
 
+def shell(cmd):
+    return subprocess.call(cmd, shell=True)
 
 def exit(msg):
     sys.exit(textwrap.dedent(msg))
