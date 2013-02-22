@@ -18,6 +18,8 @@ RX_REPO = re.compile(r'.+/(.+?).git$')
 def main():
     source = os.path.join(_K_CONF, 'ref_repos.list')
     target = os.path.join(HOME, 'Rprojects', 'Reference')
+    if not os.path.isdir(target):
+        os.makedirs(target)
     extra = update(source, target)
 
     source = os.path.join(_K_CONF, 'my_repos.list')
