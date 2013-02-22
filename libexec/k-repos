@@ -42,7 +42,8 @@ def update(source, target):
     dirs = map(make_updater(target), lines)
     targets = os.listdir(target)
     targets = map(lambda n: os.path.join(target, n), targets)
-    return filter(lambda d: d not in dirs and d is not 'Reference', targets)
+    skip = [os.path.join(target, 'Reference')]
+    return filter(lambda d: d not in dirs and d not in skip, targets)
 
 
 def make_updater(dirname):
