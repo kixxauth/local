@@ -44,6 +44,7 @@ def main():
             gitignore)
     os.chmod(gitignore, 0664)
 
+    # Pull the 'local' repository.
     rprojects = os.path.join(home, 'Rprojects')
     if not os.path.isdir(rprojects):
         os.mkdir(rprojects)
@@ -58,8 +59,11 @@ def main():
     else:
         print "Local git repo already exists; not pulling."
 
+    # Install the local subs.
+    subprocess.call(os.path.join(localrepo, 'install'), shell=True)
 
     print "Done. Do `rm setup.py` to remove me."
+    print "Run `ksys` for more."
 
 
 def key_usb_path():
