@@ -5,22 +5,29 @@
 #
 # COMMANDS
 #   dotfiles    Pull and install the 'dotfiles' repo.
+#   node        Fetch, build, and install Node.js.
 
-THISDIR="$(cd `dirname "$0"` && pwd)"
-LIBDIR="$THISDIR/lib"
+THIS="$(cd `dirname "$0"` && pwd)"
+LIBDIR="$THIS/lib"
+NODEDIR="$HOME/tmp/node_install"
 
 source "$LIBDIR/utils.sh"
 
 main () {
     local cmd="$1"
+    shift
 
     case $cmd in
         'dotfiles')
             install_dotfiles "$@"
             ;;
+        'node')
+            install_node "$@"
+            ;;
         * )
             echo "COMMANDS"
             echo "  dotfiles    Pull and install the 'dotfiles' repo."
+            echo "  node        Fetch, build, and install Node.js."
             exit 2
             ;;
     esac
@@ -46,6 +53,44 @@ install_dotfiles () {
 
     echo "dotfiles installed."
     echo "You'll probably want to restart your shell."
+}
+
+install_node () {
+    local version=$( cat "$_KSYS_CONF/node.version" )
+
+    if [ -z $version ]; then
+        fail "No Node.js version specified"
+    fi
+
+    echo 'Checking for Node.js ...'
+    local installed_version=$( node --version )
+
+    if [ "$installed_version" != "$version" ]; then
+        echo "Installing Node.js $version"
+
+        fetch_node "$version"
+        cd "$NODEDIR"
+        "$NODEDIR/configure" || fail "Unable to configure Node.js"
+        make || fail "Unable to make Node.js"
+        sudo make install || fail "Unable to install Node.js"
+
+        rm -rf "$NODEDIR"
+    fi
+
+    installed_version=$( node --version )
+    echo "Node.js $installed_version installed"
+}
+
+fetch_node () {
+    local version="$1"
+    local url="http://nodejs.org/dist/$version/node-$version.tar.gz"
+    echo "Fetching Node.js from $url"
+
+    ensure_dir "$NODEDIR"
+
+    curl -# -L "$url" \
+        | tar xzf - -C "$NODEDIR" --strip-components=1 \
+        || fail "Could not download Node.js $version"
 }
 
 main "$@"
