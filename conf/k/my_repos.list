@@ -8,7 +8,7 @@ git@github.com:FireworksProject/capsulate.git
 git@github.com:FireworksProject/cloudmill.git
 git@github.com:FireworksProject/cm-engine.git
 git@github.com:FireworksProject/corkboard-blog.git
-git@github.com:FireworksProject/corkboard-proto.git
+git@saks.fireworksproject.com:~/corkboard-proto.git
 git@github.com:FireworksProject/corkboard-scripts.git
 git@github.com:FireworksProject/corkboard-website.git
 git@github.com:FireworksProject/fireworksproject.git
