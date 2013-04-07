@@ -22,6 +22,7 @@ abs_dirname() {
 libexec_path="$(abs_dirname "$0")"
 export _K_ROOT="$(abs_dirname "$libexec_path")"
 export _K_CONF="$_K_ROOT/conf/k"
+export _K_LIB="$_K_ROOT/libexec/lib"
 export PATH="${libexec_path}:$PATH"
 
 command="$1"

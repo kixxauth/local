@@ -1,0 +1,17 @@
+- ***.swp
+- ***.pyc
+- .adobe/***
+- .cache/***
+- .dropbox/***
+- .dropbox-dist/***
+- .macromedia/***
+- .mozilla/firefox/kixx.default/Cache/***
+- .mozilla/firefox/kixx.Developer/Cache/***
+- .mylogs/snapbak.log
+- .npm/***
+- .opera/cache/***
+- Rprojects/Reference/***
+- tmp/***
+- .vagrant***
+- .VirtualBox/*.vdi
+- VirtualBox_VMs/***

@@ -1,19 +1,15 @@
 #!/bin/bash
-THISDIR="$(cd `dirname "$0"` && pwd)"
-ROOTDIR="$( dirname "$THISDIR" )"
-LIBDIR="$ROOTDIR/lib"
-CONFDIR="$ROOTDIR/conf"
+# Usage: k snapbak
+# Summary: Sync my entire home directory with the archive directory.
+# Help: Uses rsync to copy the delta of the two directories.
 
-source "$CONFDIR/conf.sh"
-source "$LIBDIR/utils.sh"
+source "$_K_LIB/utils.sh"
 
 main () {
     local src="$HOME"
     local dest="/archive/snapbak/kixx"
-    local logfile="$LOGDIR/snapbak.log"
-    local excludefile="$CONFDIR/snapbak_exclude.list"
+    local excludefile="$_K_CONF/snapbak_exclude.list"
 
-    ensure_dir $LOGDIR
     ensure_dir $dest
 
     rsync \
@@ -24,7 +20,6 @@ main () {
         --owner \
         --progress \
         --human-readable \
-        --log-file="$logfile" \
         --exclude-from="$excludefile" \
         "$src/" "$dest/" || fail "$0: rsync failed"
 }
