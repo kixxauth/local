@@ -14,4 +14,4 @@
 - tmp/***
 - .vagrant***
 - .VirtualBox/*.vdi
-- VirtualBox_VMs/***
+- VirtualBoxVMs/***
