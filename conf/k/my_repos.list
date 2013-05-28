@@ -5,6 +5,7 @@ git@github.com:FireworksProject/corkboard-blog.git
 git@saks.fireworksproject.com:~/corkboard-proto.git
 git@github.com:FireworksProject/corkboard-scripts.git
 git@github.com:FireworksProject/corkboard-website.git
+git@github.com:kixxauth/couchdb_raw.git
 git@github.com:kixxauth/dotfiles.git
 git@github.com:kixxauth/enginemill.git
 git@github.com:kixxauth/filepath.git
