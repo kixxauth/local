@@ -23,4 +23,6 @@
 + /.priv/***
 + /tmp/***
 + /Videos/***
++ /.vim/
++ /.vim/spell/***
 - *
