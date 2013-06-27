@@ -24,3 +24,4 @@ git://github.com/cloudhead/node-static.git
 git://github.com/kriskowal/q.git
 git://github.com/documentcloud/underscore.git
 git://github.com/madrobby/zepto.git
+git@github.com:thoughtbot/backbone-js-on-rails.git
