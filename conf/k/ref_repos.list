@@ -20,6 +20,7 @@ git://github.com/dmitryf/elements.git
 git://github.com/joyent/node.git
 git://github.com/JerrySievert/node-date-utils.git
 git://github.com/nodejitsu/node-http-proxy.git
+git@github.com:Modernizr/Modernizr.git
 git://github.com/cloudhead/node-static.git
 git://github.com/kriskowal/q.git
 git://github.com/documentcloud/underscore.git
