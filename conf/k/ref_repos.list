@@ -9,6 +9,7 @@ git://github.com/visionmedia/deploy.git
 git://github.com/kriskowal/es5-shim.git
 git://github.com/visionmedia/express.git
 git://github.com/valums/file-uploader.git
+git://github.com/TryGhost/Ghost.git
 git://github.com/felixge/node-formidable.git
 git://github.com/h5bp/html5-boilerplate.git
 git://github.com/jquery/jquery.git
