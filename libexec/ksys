@@ -22,6 +22,7 @@ abs_dirname() {
 libexec_path="$(abs_dirname "$0")"
 export _KSYS_ROOT="$(abs_dirname "$libexec_path")"
 export _KSYS_CONF="$_KSYS_ROOT/conf/ksys"
+export _KSYS_LIB="$_KSYS_ROOT/libexec/lib"
 export RPROJECTS="$HOME/Rprojects"
 export PATH="${libexec_path}:$PATH"
 
