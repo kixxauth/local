@@ -62,15 +62,14 @@ def main():
     # Install the local subs.
     subprocess.call(os.path.join(localrepo, 'install'), shell=True)
 
-    print "Done. Do `rm setup.py` to remove me."
-    print "Run `ksys` for more."
+    print "Done. Run `ksys` for more."
 
 
 def key_usb_path():
     if sys.platform == 'darwin':
         return '/Volumes/KEYS'
     if sys.platform == 'linux2':
-        return '/media/KEYS'
+        return '/media/kris/KEYS'
     return None
 
 
