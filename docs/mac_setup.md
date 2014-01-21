@@ -6,6 +6,9 @@ Use Safari to get it, and get Firefox while you're at it. Also, you need the
 account credentials for kristoffwalk@gmail.com to setup the sync system in
 Chrome.
 
+You'll need your google account credentials from KeePass on another machine to
+sign into Chrome and get the sync process started.
+
 ## iTerm
 Get it: [home page](http://www.iterm2.com/)
 
@@ -16,9 +19,13 @@ We're not going to spend time
 [tweaking it out](http://www.iterm2.com/#/section/features)
 now, but that'll be a fun way to kill an afternoon later.
 
-# Dropbox
+## Dropbox
 Just keep in mind that it will take a while to download all your files.  Also,
 you'll need the Dropbox credentials from KeePass on another machine.
+
+## Xcode
+Will need to install Xcode from the app store before we can run the rest of the
+setup stuff.
 
 ## Setupstick
 Plugin a USB drive on another machine and run `ksys setupstick` to transfer SSH
