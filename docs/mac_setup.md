@@ -29,14 +29,12 @@ setup stuff.
 
 ## Setupstick
 Plugin a USB drive on another machine and run `ksys setupstick` to transfer SSH
-keys and the setup.py script to it. Tranfer the USB stick to the target machine
-and copy the setup.py script to the home directory. You can find it at
-`/Volumes/KEYS/setup.py`.
+keys and the setup.py script to it.
 
 ## Setup
-Next, run the setup script with
+Next, plugin the USB drive on the target machine and run the setup script with
 
-	python ~/setup.py
+	python /Volumes/KEYS/setup.py
 
 It will install the SSH keys from the setupstick, the master .gitconfig and
 .gitignore files, pull the local repository, and create symlinks the to local

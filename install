@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 this="$(cd `dirname "$0"` && pwd)"
 
+if [ ! -d "/usr/local/bin" ]; then
+	sudo mkdir -p /usr/local/bin
+fi
+
 k="/usr/local/bin/k"
 if [ ! -f $k ]; then
     sudo ln -s "$this/libexec/k" $k
