@@ -16,21 +16,15 @@ RX_REPO = re.compile(r'.+/(.+?).git$')
 
 
 def main():
-    source = os.path.join(_K_CONF, 'ref_repos.list')
-    target = os.path.join(HOME, 'Rprojects', 'Reference')
-    if not os.path.isdir(target):
-        os.makedirs(target)
-    extra = update(source, target)
-
     source = os.path.join(_K_CONF, 'my_repos.list')
     target = os.path.join(HOME, 'Rprojects')
-    extra += update(source, target)
+    extra = update(source, target)
 
     print "Done updating repositories."
 
     if len(extra):
         print "The following directories are no longer updated and "
-        print "should be removed:"
+        print "could be removed:"
         for name in extra:
             print name
     return
