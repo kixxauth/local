@@ -6,10 +6,10 @@ Run the install script (does sym linking).
 	./install
 
 ## Docs
-Find everything else in the `docs/` folder.
+Personal PC (Mac and Ubuntu) setup is documented in the docs folder as well as some other handy tips and tricks.
 
 Copyright and License
 ---------------------
-Copyright (c) 2013 by Kris Walker <kris@kixx.name> (http://www.kixx.name).
+Copyright (c) 2015 by Kris Walker <kris@kixx.name> (http://www.kixx.name).
 
 Unless otherwise indicated, all source code is licensed under the MIT license. See MIT-LICENSE for details.
