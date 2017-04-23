@@ -36,6 +36,7 @@ def main():
     gitconfig = os.path.join(home, '.gitconfig')
     shutil.copy(os.path.join(source, '.gitconfig'), gitconfig)
     os.chmod(gitconfig, 0640)
+    print "Installed global .gitconfig"
 
     # Copy .gitignore.
     gitignore = os.path.join(home, '.gitignore_master')
@@ -43,26 +44,31 @@ def main():
             os.path.join(source, '.gitignore_master'),
             gitignore)
     os.chmod(gitignore, 0664)
+    print "Installed global .gitconfig"
 
     # Pull the 'local' repository.
-    rprojects = os.path.join(home, 'Rprojects')
-    if not os.path.isdir(rprojects):
-        os.mkdir(rprojects)
+    # Don't bother automatically cloning the "local" repo - 2017-04-23
+    #
+    # rprojects = os.path.join(home, 'Rprojects')
+    # if not os.path.isdir(rprojects):
+    #     os.mkdir(rprojects)
 
-    localrepo = os.path.join(rprojects, 'local')
-    if not os.path.isdir(localrepo):
-        os.chdir(rprojects)
-        if subprocess.call(['git', 'clone', LOCAL_REPO]) is not 0:
-            exit("""\
-                    There was a problem cloning the git repo.
-                    Exiting.""")
-    else:
-        print "Local git repo already exists; not pulling."
+    # localrepo = os.path.join(rprojects, 'local')
+    # if not os.path.isdir(localrepo):
+    #     os.chdir(rprojects)
+    #     if subprocess.call(['git', 'clone', LOCAL_REPO]) is not 0:
+    #         exit("""\
+    #                 There was a problem cloning the git repo.
+    #                 Exiting.""")
+    # else:
+    #     print "Local git repo already exists; not pulling."
 
     # Install the local subs.
-    subprocess.call(os.path.join(localrepo, 'install'), shell=True)
+    # Don't bother installing the sub commands - 2017-04-23
+    #
+    # subprocess.call(os.path.join(localrepo, 'install'), shell=True)
 
-    print "Done. Run `ksys` for more."
+    print "Done."
 
 
 def key_usb_path():
