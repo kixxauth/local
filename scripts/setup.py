@@ -47,26 +47,24 @@ def main():
     print "Installed global .gitconfig"
 
     # Pull the 'local' repository.
-    # Don't bother automatically cloning the "local" repo - 2017-04-23
-    #
-    # rprojects = os.path.join(home, 'Rprojects')
-    # if not os.path.isdir(rprojects):
-    #     os.mkdir(rprojects)
+    rprojects = os.path.join(home, 'Projects')
+    if not os.path.isdir(rprojects):
+        os.mkdir(rprojects)
 
-    # localrepo = os.path.join(rprojects, 'local')
-    # if not os.path.isdir(localrepo):
-    #     os.chdir(rprojects)
-    #     if subprocess.call(['git', 'clone', LOCAL_REPO]) is not 0:
-    #         exit("""\
-    #                 There was a problem cloning the git repo.
-    #                 Exiting.""")
-    # else:
-    #     print "Local git repo already exists; not pulling."
+    localrepo = os.path.join(rprojects, 'local')
+    if not os.path.isdir(localrepo):
+        os.chdir(rprojects)
+        if subprocess.call(['git', 'clone', LOCAL_REPO]) is 0:
+            print "Installed ~/Projects/local repo"
+        else:
+            exit("""\
+                    There was a problem cloning the git repo.
+                    Exiting.""")
+    else:
+        print "Local git repo already exists; not pulling."
 
     # Install the local subs.
-    # Don't bother installing the sub commands - 2017-04-23
-    #
-    # subprocess.call(os.path.join(localrepo, 'install'), shell=True)
+    subprocess.call(os.path.join(localrepo, 'install'), shell=True)
 
     print "Done."
 
