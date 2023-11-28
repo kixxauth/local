@@ -1,7 +1,7 @@
 import { parseArgs } from 'node:util';
-import generateEncryptionKey32 from './commands/generate-encryption-key.js';
-import encryptFiles from './commands/encrypt-files.js';
-import decryptFiles from './commands/decrypt-files.js';
+import generateEncryptionKey32 from './commands/generate-encryption-key.mjs';
+import encryptFiles from './commands/encrypt-files.mjs';
+import decryptFiles from './commands/decrypt-files.mjs';
 
 
 const args = process.argv.slice(2);

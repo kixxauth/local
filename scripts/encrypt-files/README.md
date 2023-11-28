@@ -9,7 +9,7 @@ There are 3 tools for encrypting files before sending or storing them elsewhere:
 The general tactic is to use `genkey` to create a 32 byte key and save it somewhere.
 
 ```
-node Projects/Kris/webserver/tools/cli.js genkey > ~/Documents/key-2023-07-23.txt
+node Projects/Kris/local/scripts/encrypt-files/cli.js genkey > ~/Documents/key-2023-07-23.txt
 ```
 
 That key is then used to encrypt and decrypt files. For example, take the `~/.secrets` directory:
@@ -27,9 +27,9 @@ That key is then used to encrypt and decrypt files. For example, take the `~/.se
 To encrypt each file and duplicate the file tree elsewhere:
 
 ```
-node Projects/Kris/webserver/tools/cli.js encryptfiles \
+node Projects/Kris/local/scripts/encrypt-files/cli.js encryptfiles \
   --key 59648774bc92986da4fb0e05aa61f2db59491d167385105c328ff331c4a74e61 \
-  --input ~/.secrets/
+  --input ~/.secrets/ \
   --output ~/Downloads/
 ```
 
