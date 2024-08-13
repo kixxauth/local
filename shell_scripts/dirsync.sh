@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## This script demonstrates how to use rsync to copy an entire directory
+## to a remote (or local) location.
+
 main () {
     local cmd="$1"
     local src="$( pwd )"
