@@ -11,7 +11,7 @@ Your custom sub programs go in `libexec/` where they will be discovered automagi
 
 Static data like configs go in the `share/` directory.
 
-*Tip:* You can reference the root directory for this project with the exported env var `$_KSYS_ROOT`
+*Tip:* You can reference the root directory for this project with the exported env var `$_KSYS_ROOT`.
 
 After installing this repo, run `./bin/ksys init` and then add a line to invoke it from your bash profile:
 
@@ -19,6 +19,9 @@ After installing this repo, run `./bin/ksys init` and then add a line to invoke 
 # Initialize my local ksys library for autocompletions
 eval "$(/Users/kris/Projects/local/bin/ksys init -)"
 ```
+
+## Dotfiles
+This project also contains my dot files like `.bashrc` and `.gitconfig`. Run `ksys dot-files` to deplay them. Check the .bashrc PATH export for required manual updates depending on your situation.
 
 ## Scripts
 Useful scripts and tools are found in the `scripts/` folder.

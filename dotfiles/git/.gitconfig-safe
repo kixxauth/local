@@ -1,0 +1,10 @@
+[user]
+	email = kris@kixx.name
+	name = Kris Walker
+[init]
+	templateDir = ~/.git_template
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_main

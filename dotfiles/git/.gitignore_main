@@ -1,0 +1,21 @@
+# Ignore Vim .swp files and temp backups
+*.swp
+*.swo
+*~
+
+# Ignore Mac OS metadata files
+.DS_Store
+
+# Ignore Mac OS X extended file attribute files
+._*
+._*/
+
+# Ignore TextMate project files
+*.tmproj
+
+# Emacs tags files
+TAGS
+*.tags
+
+# Ignore compiled python files
+*.pyc

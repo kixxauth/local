@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Usage: ksys dot-files
+# Summary: Install dot files in $HOME
+# Help: Move the dot files from here (./dotfiles) to their appropriate
+# place in the $HOME directory.
+
+set -e
+
+THISDIR="$(cd `dirname "$0"` && pwd)"
+ROOTDIR="$( dirname "$THISDIR" )"
+
+if [ "$( uname )" == "Darwin" ]; then
+  ## Mac
+  echo 'updating ~/.bash_profile'
+  cp "$_KSYS_ROOT/dotfiles/.bashrc" "$HOME/.bashrc"
+  cp "$_KSYS_ROOT/dotfiles/.bash_profile" "$HOME/.bash_profile"
+  cp "$_KSYS_ROOT/dotfiles/git/.git-completion.bash" "$HOME/.git-completion.bash"
+else
+  ## Linux
+  echo 'updating ~/.bashrc'
+  cp "$_KSYS_ROOT/dotfiles/.bashrc" "$HOME/.bashrc"
+fi
+
+echo 'updating ~/.gitignore_main'
+cp $_KSYS_ROOT/dotfiles/git/.gitignore_main $HOME/.gitignore_master
+
+echo 'updating ~/.git-prompt.sh'
+cp "$_KSYS_ROOT/dotfiles/git/.git-prompt.sh" "$HOME/.git-prompt.sh"
+
+echo 'updating ~/.gitconfig'
+cp "$_KSYS_ROOT/dotfiles/git/.gitconfig-safe" "$HOME/.gitconfig"
+
+echo 'updating ~/.vimrc'
+cp $_KSYS_ROOT/dotfiles/vim/.vimrc $HOME/.vimrc
