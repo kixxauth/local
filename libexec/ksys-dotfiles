@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: ksys dot-files
+# Usage: ksys dotfiles
 # Summary: Install dot files in $HOME
 # Help: Move the dot files from here (./dotfiles) to their appropriate
 # place in the $HOME directory.

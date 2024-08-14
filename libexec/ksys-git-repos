@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: ksys git-repos
+# Summary: Search the given directory for git URLs
+# Help: Search the given directory tree, looking for .git/config files and
+# printing the found git URLs to STDOUT.
+set -e
+
+node $_KSYS_ROOT/libjs/find-git-repos.mjs $1
