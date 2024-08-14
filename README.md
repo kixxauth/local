@@ -5,15 +5,26 @@ Sys admin tools and scripts I use on my local boxes.
 This project is built from the ["sub" concept](https://github.com/qrush/sub) developed at 37Signals.
 
 ## Installation
-Run the install script (does sym linking for sub commands).
+The `bin/` and `completions/` directories are internal to the sub program.
 
-	./install
+Your custom sub programs go in `libexec/` where they will be discovered automagically.
+
+Static data like configs go in the `share/` directory.
+
+*Tip:* You can reference the root directory for this project with the exported env var `$_KSYS_ROOT`
+
+After installing this repo, run `./bin/ksys init` and then add a line to invoke it from your bash profile:
+
+```bash
+# Initialize my local ksys library for autocompletions
+eval "$(/Users/kris/Projects/local/bin/ksys init -)"
+```
 
 ## Scripts
 Useful scripts and tools are found in the `scripts/` folder.
 
 ## Docs
-Personal PC (Mac and Ubuntu) setup is documented in the docs folder as well as some other handy tips and tricks.
+Documentation for useful tools, tricks, and tips I've picked up over the years can be found in the `docs/` directory.
 
 Copyright and License
 ---------------------
