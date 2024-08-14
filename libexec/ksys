@@ -20,20 +20,18 @@ abs_dirname() {
 }
 
 libexec_path="$(abs_dirname "$0")"
-export _K_ROOT="$(abs_dirname "$libexec_path")"
-export _K_CONF="$_K_ROOT/conf/k"
-export _K_LIB="$_K_ROOT/libexec/lib"
+export _KSYS_ROOT="$(abs_dirname "$libexec_path")"
 export PATH="${libexec_path}:$PATH"
 
 command="$1"
 case "$command" in
 "" | "-h" | "--help" )
-  exec k-help
+  exec ksys-help
   ;;
 * )
-  command_path="$(command -v "k-$command" || true)"
+  command_path="$(command -v "ksys-$command" || true)"
   if [ ! -x "$command_path" ]; then
-    echo "k: no such command \`$command'" >&2
+    echo "ksys: no such command \`$command'" >&2
     exit 1
   fi
 

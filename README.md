@@ -2,7 +2,7 @@ Local
 =====
 Sys admin tools and scripts I use on my local boxes.
 
-This project makes heavy use of the ["sub" concept](https://github.com/qrush/sub) from 37Signals.
+This project is built from the ["sub" concept](https://github.com/qrush/sub) developed at 37Signals.
 
 ## Installation
 Run the install script (does sym linking for sub commands).

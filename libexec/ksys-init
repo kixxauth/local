@@ -45,28 +45,28 @@ if [ -z "$print" ]; then
     ;;
   esac
 
-  { echo "# Load k automatically by adding"
+  { echo "# Load ksys automatically by adding"
     echo "# the following to ${profile}:"
     echo
-    echo "eval \"\$(${_K_ROOT}/bin/k init -)\""
+    echo "eval \"\$(${_KSYS_ROOT}/bin/ksys init -)\""
     echo
   } >&2
 
   exit 1
 fi
 
-echo "export PATH=\"\${PATH}:${_K_ROOT}/bin\""
+echo "export PATH=\"\${PATH}:${_KSYS_ROOT}/bin\""
 
 case "$shell" in
 bash | zsh )
-  echo "source \"$root/completions/k.${shell}\""
+  echo "source \"$root/completions/ksys.${shell}\""
   ;;
 esac
 
-commands=(`k commands --sh`)
+commands=(`ksys commands --sh`)
 IFS="|"
 cat <<EOS
-_k_wrapper() {
+_ksys_wrapper() {
   local command="\$1"
   if [ "\$#" -gt 0 ]; then
     shift
@@ -74,9 +74,9 @@ _k_wrapper() {
 
   case "\$command" in
   ${commands[*]})
-    eval \`k "sh-\$command" "\$@"\`;;
+    eval \`ksys "sh-\$command" "\$@"\`;;
   *)
-    command k "\$command" "\$@";;
+    command ksys "\$command" "\$@";;
   esac
 }
 EOS
@@ -86,9 +86,9 @@ EOS
 # fix both cases here by letting zsh have a function, and bash have its alias.
 case "$shell" in
 bash )
-  echo "alias k=_k_wrapper"
+  echo "alias ksys=_ksys_wrapper"
   ;;
 zsh )
-  echo "k=_k_wrapper"
+  echo "ksys=_ksys_wrapper"
   ;;
 esac

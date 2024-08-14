@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Usage: k commands
-# Summary: List all k commands
-# Help: This command is mostly used for autocompletion in various shells, and for `k help`.
+# Usage: ksys commands
+# Summary: List all ksys commands
+# Help: This command is mostly used for autocompletion in various shells, and for `ksys help`.
 # Also, this command helps find commands that are named the same as potentially builtin shell commands (which, cd, etc)
 
 set -e
 
-# Provide k completions
+# Provide ksys completions
 if [ "$1" = "--complete" ]; then
   echo --sh
   echo --no-sh
@@ -24,8 +24,8 @@ fi
 shopt -s nullglob
 
 { for path in ${PATH//:/$'\n'}; do
-    for command in "${path}/k-"*; do
-      command="${command##*k-}"
+    for command in "${path}/ksys-"*; do
+      command="${command##${path}/ksys-}"
       if [ -n "$sh" ]; then
         if [ ${command:0:3} = "sh-" ]; then
           echo ${command##sh-}

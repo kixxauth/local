@@ -7,7 +7,7 @@ print_summaries() {
   local longest_command=0
   local command
 
-  for command in $(k-commands); do
+  for command in $(ksys-commands); do
     local file="$(command_path "$command")"
     if [ ! -h "$file" ]; then
       local summary="$(summary "$file")"
@@ -38,6 +38,9 @@ print_help() {
 
   if [ -n "$usage" ]; then
     echo "$usage"
+    
+    local summary="$(summary "$file")"
+    [ -n "$summary" ] && echo "Summary: $summary"
 
     local help="$(help "$file")"
     [ -n "$help" ] && echo && echo "$help"
@@ -47,7 +50,7 @@ print_help() {
 }
 
 command_path() {
-  command -v "k-$command" || command -v "k-sh-$command" || true
+  command -v "ksys-$command" || command -v "ksys-sh-$command" || true
 }
 
 summary() {
@@ -74,20 +77,20 @@ truncate() {
   fi
 }
 
-# Provide k completions
+# Provide ksys completions
 if [ "$1" = "--complete" ]; then
-  exec "k-commands"
+  exec "ksys-commands"
   exit
 fi
 
 command="$1"
 case "$command" in
-"") echo "Usage: k <command> [<args>]
+"") echo "Usage: ksys <command> [<args>]
 
-Some useful k commands are:
+Some useful ksys commands are:
 $(print_summaries)
 
-See 'k help <command>' for information on a specific command."
+See 'ksys help <command>' for information on a specific command."
 ;;
 *)
   file="$(command_path "$command")"
@@ -95,7 +98,7 @@ See 'k help <command>' for information on a specific command."
   if [ -n "$file" ]; then
     print_help "$file"
   else
-    echo "k: no such command \`$command'" >&2
+    echo "ksys: no such command \`$command'" >&2
     exit 1
   fi
 esac
