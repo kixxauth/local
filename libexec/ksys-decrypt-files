@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Usage: ksys decrypt-files <key> <srcfile> <destdir>
+# Summary: Decrypt a zip of files created by encrypt-files
+# Help: Unzip and decript files from a zip archive created by
+# encrypt-files. A new directory will be created in the destdir
+# containing the un-encrypted files.
+set -e
+
+resolve_link() {
+  $(type -p greadlink readlink | head -1) $1
+}
+
+abs_dirname() {
+  local cwd="$(pwd)"
+  local path="$1"
+
+  while [ -n "$path" ]; do
+    cd "${path%/*}"
+    local name="${path##*/}"
+    path="$(resolve_link "$name" || true)"
+  done
+
+  pwd
+  cd "$cwd"
+}
+
+enckey=$1
+src_filepath=$2
+out_dir=$(abs_dirname $3)
+filepath=$(basename $src_filepath)
+filename=${filepath%.zip}
+encrypted_dir=$out_dir/$filename
+target_dir="$out_dir/$filename-unencrypted"
+
+unzip -qd $out_dir $src_filepath
+
+node $_KSYS_ROOT/libjs/encrypt-files/cli.mjs decryptfiles \
+    --key $enckey \
+    --input $encrypted_dir \
+    --output $target_dir
+
+rm -r $encrypted_dir

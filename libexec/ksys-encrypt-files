@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Usage: ksys encrypt-files <key> <srcdir> <destdir>
+# Summary: Encrypt and zip a folder of files.
+# Help: Recursively encrypt the srcdir directory and create an zip
+# archive of the encrypted results in the destdir directory.
+set -e
+
+resolve_link() {
+  $(type -p greadlink readlink | head -1) $1
+}
+
+abs_dirname() {
+  local cwd="$(pwd)"
+  local path="$1"
+
+  while [ -n "$path" ]; do
+    cd "${path%/*}"
+    local name="${path##*/}"
+    path="$(resolve_link "$name" || true)"
+  done
+
+  pwd
+  cd "$cwd"
+}
+
+dirname="secrets-$(date +"%Y-%m-%dT%H-%M-%S")"
+
+enckey=$1
+src_dirname=$(abs_dirname $2)
+dest_dirname=$(abs_dirname $3)
+dest_full_dirname="$dest_dirname/$dirname"
+
+node $_KSYS_ROOT/libjs/encrypt-files/cli.mjs encryptfiles \
+    --key $enckey \
+    --input $src_dirname \
+    --output $dest_full_dirname
+
+original_pwd=$(pwd)
+
+cd $dest_dirname
+zip -rq "./$dirname.zip" "./$dirname"
+cd $original_pwd
+
+rm -rf $dest_full_dirname

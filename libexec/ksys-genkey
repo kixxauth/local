@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: ksys genkey
+# Summary: Generate at 32 byte encryption key
+# Help: Generate a 32 byte encryption key, encoded in hex,
+# and spit it out to STDOUT.
+set -e
+
+node $_KSYS_ROOT/libjs/encrypt-files/cli.mjs genkey

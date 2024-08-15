@@ -11,8 +11,7 @@ const ALGO = 'aes-256-cbc';
 export default async function encryptFiles({ key, input, output }) {
     const today = new Date();
     const timestring = today.toISOString().split('.')[0];
-    const outputDirname = `secrets-${ timestring.replace(/:/g, '-') }`;
-    const outputDirpath = path.join(output, outputDirname);
+    const outputDirpath = output;
 
     await fsp.mkdir(outputDirpath, { recursive: true });
 
