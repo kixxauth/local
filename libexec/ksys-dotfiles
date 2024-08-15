@@ -21,14 +21,11 @@ else
   cp "$_KSYS_ROOT/dotfiles/.bashrc" "$HOME/.bashrc"
 fi
 
-echo 'updating ~/.gitignore_main'
-cp $_KSYS_ROOT/dotfiles/git/.gitignore_main $HOME/.gitignore_master
-
-echo 'updating ~/.git-prompt.sh'
+echo 'updating git configs'
+cp -r "$_KSYS_ROOT/dotfiles/git/.git_template" "$HOME/"
+cp "$_KSYS_ROOT/dotfiles/git/.gitignore_main" "$HOME/.gitignore_main"
 cp "$_KSYS_ROOT/dotfiles/git/.git-prompt.sh" "$HOME/.git-prompt.sh"
-
-echo 'updating ~/.gitconfig'
 cp "$_KSYS_ROOT/dotfiles/git/.gitconfig-safe" "$HOME/.gitconfig"
 
-echo 'updating ~/.vimrc'
+echo 'updating vim configs'
 cp $_KSYS_ROOT/dotfiles/vim/.vimrc $HOME/.vimrc

@@ -116,13 +116,12 @@ if [ -d /usr/local/bin ]; then
   PATH=/usr/local/bin:$PATH
 fi
 
-## Uncomment these if they are installed
-
 # Macs need to have git autocomplete enabled.
-# Autocomplete for git
-# if [ -f ~/.git-completion.bash ]; then
-#   . ~/.git-completion.bash
-# fi
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
+
+## Uncomment these if they are installed
 
 # Homebrew on a Mac
 # Setting the PATH for Homebrew, and programs installed by Homebrew
