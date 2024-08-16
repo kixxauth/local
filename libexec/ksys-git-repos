@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Usage: ksys git-repos
+# Usage: ksys git-repos <dirpath>
 # Summary: Search the given directory for git URLs
 # Help: Search the given directory tree, looking for .git/config files and
 # printing the found git URLs to STDOUT.
