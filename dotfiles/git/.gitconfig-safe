@@ -9,4 +9,4 @@
 	editor = vim
 	excludesfile = ~/.gitignore_main
 [pull]
-	ff = only
+	rebase = false
