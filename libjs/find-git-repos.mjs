@@ -65,7 +65,7 @@ async function processGitDirectory(filepath) {
             }
 
             URLS.add(url);
-            console.log(url);
+            console.log(`${ url }\t${ path.dirname(filepath) }`);
             return;
         }
     }
