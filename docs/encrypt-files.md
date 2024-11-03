@@ -27,7 +27,7 @@ That key is then used to encrypt and decrypt files. For example, take the `~/.se
 To encrypt each file and duplicate the file tree elsewhere:
 
 ```
-node Projects/Kris/webserver/tools/cli.js encryptfiles \
+node local/libjs/encrypt-files/cli.js encryptfiles \
   --key 59648774bc92986da4fb0e05aa61f2db59491d167385105c328ff331c4a74e61 \
   --input ~/.secrets/
   --output ~/Downloads/
@@ -50,7 +50,7 @@ unzip secrets-2023-07-23T13-54-11.zip
 Then use our decryption tool to do the rest:
 
 ```
-node ~/Projects/Kris/webserver/tools/cli.js decryptfiles \
+node local/libjs/encrypt-files/cli.js decryptfiles \
   --key 59648774bc92986da4fb0e05aa61f2db59491d167385105c328ff331c4a74e61 \
   --input ./secrets-2023-07-23T13-54-11 \
   --output ~/Documents/my_secrets
