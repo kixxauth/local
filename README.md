@@ -22,9 +22,11 @@ eval "$(/Users/kris/Projects/local/bin/ksys init -)"
 Some useful tools contained within.
 
 ### Encrypt / Decrypt Files
-The `ksys genkey`, `ksys encrypt-files`, and `ksys decrypt-files` commands all worl together, allowing you to encrypt a directory of files into a zip archive, send it off somewhere, and unzip and decrypt it on the other side.
+The `ksys genkey`, `ksys encrypt-files`, and `ksys decrypt-files` commands all work together, allowing you to encrypt a directory of files into a zip archive, send it off somewhere, and unzip and decrypt it on the other side.
 
 The key must be sent using a different channel of communication.
+
+See `docs/encrypt-files.md` for more information.
 
 ### Git Repos
 Use `ksys git-repos` to recursively search a directory tree, and print out the git URL for any git repositories which are found.
@@ -48,6 +50,6 @@ Just create a new executable, in any language, in the `libexec/` directory and p
 
 Copyright and License
 ---------------------
-Copyright (c) 2015 - 2024 Kris Walker (https://www.kriswalker.me).
+Copyright (c) 2015 - 2025 Kris Walker (https://www.kriswalker.me).
 
 Unless otherwise indicated, all source code is licensed under the MIT license. See LICENSE for details.
