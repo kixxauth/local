@@ -34,15 +34,8 @@ ksys encrypt-files \
 ```
 
 This will create a zip archive like `~/Downloads/secrets-2023-07-23T13-54-11.zip`.
-```
 
-In the new location, unzip it:
-
-```
-unzip secrets-2023-07-23T13-54-11.zip
-```
-
-Then use our decryption tool to do the rest:
+In the new location run our decryption tool. The output directory must already exist, and a new directory will be created there called `secrets-2023-07-23T13-54-11-unencrypted/`.
 
 ```
 ksys decrypt-files \
