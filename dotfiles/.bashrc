@@ -121,13 +121,18 @@ if [ -f ~/.git-completion.bash ]; then
   source ~/.git-completion.bash
 fi
 
-## Uncomment these if they are installed
+##
+# Uncomment these if they are installed:
+# We comment them out to avoid error messages if the directories are missing.
+##
 
 # Homebrew on a Mac
 # Setting the PATH for Homebrew, and programs installed by Homebrew
 # export PATH="/opt/homebrew/bin:$PATH"
 
-# My local scripts.
-# Initialize my local ksys library for autocompletions
-# eval "$(/Users/kris/Projects/local/bin/ksys init -)"
+# Node.js "global" modules
+# export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Required for Claude Code
+# export PATH="$HOME/.local/bin:$PATH"
 
