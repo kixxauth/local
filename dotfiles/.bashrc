@@ -121,6 +121,9 @@ if [ -f ~/.git-completion.bash ]; then
   source ~/.git-completion.bash
 fi
 
+# Remove the bash deprecation warning on Mac
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 ##
 # Uncomment these if they are installed:
 # We comment them out to avoid error messages if the directories are missing.
