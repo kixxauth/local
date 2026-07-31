@@ -111,11 +111,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
 
-# Customize the PATH (especially for Homebrew)
-if [ -d /usr/local/bin ]; then
-  PATH=/usr/local/bin:$PATH
-fi
-
 # Macs need to have git autocomplete enabled.
 if [ -f ~/.git-completion.bash ]; then
   source ~/.git-completion.bash
@@ -123,6 +118,19 @@ fi
 
 # Remove the bash deprecation warning on Mac
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Broadcast the CWD for Ghostty
+update_terminal_cwd() {
+    printf "\033]7;file://%s%s\a" "$HOSTNAME" "$PWD"
+}
+if [[ "$PROMPT_COMMAND" != *update_terminal_cwd* ]]; then
+    PROMPT_COMMAND='update_terminal_cwd; '"$PROMPT_COMMAND"
+fi
+
+# Customize the PATH
+if [ -d /usr/local/bin ]; then
+  PATH=/usr/local/bin:$PATH
+fi
 
 ##
 # Uncomment these if they are installed:
