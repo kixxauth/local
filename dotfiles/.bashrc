@@ -142,8 +142,13 @@ fi
 # export PATH="/opt/homebrew/bin:$PATH"
 
 # Node.js "global" modules
-# export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Required for Deno
+export PATH="$HOME/.deno/bin:$PATH"
 
 # Required for Claude Code
 # export PATH="$HOME/.local/bin:$PATH"
 
+# Go toolchain
+export PATH="/usr/local/go/bin:$PATH"
